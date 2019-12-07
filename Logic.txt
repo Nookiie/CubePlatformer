@@ -1,26 +1,26 @@
-1-	On click:
-		jump():
-			player.y+=some pixels every millisecond for 0.5 seconds?
-		fall():
-			after jump(), player falls until *collision*.
+1-	On click --> jump():
+		player.Y += ??px every ms for 0.5 seconds?
+	
+2-	fall():
+		if (*collision*==false && time after last *jump* > 0.5s) --> player.Y -= ??px every ms until *collision*.
 ------
-2-	while jumping/falling-> cannot click!
+3-	while jumping/falling --> cannot click!
 ------
-3-	Collision:
+4-	Collision:
 		1-with Spike		=dead
 		2-with side of Platform	=dead
 		3-with top  of Platform	=alive, player.Y=collision.Y until next jump/fall
 		4-with Ground Zero	=alive, player.y=0
 ------
-4-	Rotation:
+5-	Rotation:
 		while collision==false --> playerImage.setRotation(playerImage.getRotation() + 5)
-		if (collision==True) -> rotation=0
+		if (collision==True) --> rotation=0
 ------
 ------
-5-	Level Generation:
+6-	Level Generation:
 		Save the X coordinate where final piece of current Module was placed. 
 		Calculate time until final piece appears on screen.
 		Start next module after last piece appears.
 ------
-6-	Generate Ground Zero:
+7-	Generate Ground Zero:
 		Should it just be the bottom of the screen? No need to generate anything?
