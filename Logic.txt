@@ -9,12 +9,12 @@
 3-	Collision:
 		1-with Spike		=dead
 		2-with side of Platform	=dead
-		3-with top  of Platform	=alive, player stays at current Y (0 + platform.Height) until next fall
+		3-with top  of Platform	=alive, player.Y=collision.Y until next fall
 		4-with Ground Zero	=alive, player.y=0
 ------
 4-	Rotation:
-		while (y>0 && collision==false) -> playerImage.setRotation(playerImage.getRotation() + 5)
-		If collision==True -> rotation=0
+		while (y>0 && collision==false) --> playerImage.setRotation(playerImage.getRotation() + 5)
+		if (collision==True) -> rotation=0
 ------
 ------
 5-	Level Generation:
