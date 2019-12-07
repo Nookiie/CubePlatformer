@@ -26,5 +26,5 @@
 7-	Generate Ground Zero:
 		Should it just be the bottom of the screen? No need to generate anything?
 ------
-8- Lock phone orientation. In Manifest in the activity:
-android:screenOrientation="landscape"
+8- 	Lock phone orientation. In Manifest in the activity:
+		android:screenOrientation="landscape"
