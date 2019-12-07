@@ -9,7 +9,7 @@
 3-	Collision:
 		1-with Spike		=dead
 		2-with side of Platform	=dead
-		3-with top  of Platform	=alive, player stays at current Y
+		3-with top  of Platform	=alive, player stays at current Y (0 + platform.Height) until next fall
 		4-with Ground Zero	=alive, player.y=0
 ------
 4-	Rotation:
