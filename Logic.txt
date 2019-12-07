@@ -1,0 +1,26 @@
+1-	On click:
+		jump():
+			player.y+=some pixels every millisecond for 0.5 seconds?
+		fall():
+			after jump(), player falls until *collision*.
+------
+2-	while falling-> cannot click!
+------
+3-	Collision:
+		1-with Spike		=dead
+		2-with side of Platform	=dead
+		3-with top  of Platform	=alive, player stays at current Y
+		4-with Ground Zero	=alive, player.y=0
+------
+4-	Rotation:
+		while (y>0 && collision==false) -> playerImage.setRotation(playerImage.getRotation() + 5)
+		If collision==True -> rotation=0
+------
+------
+5-	Level Generation:
+		Save the X coordinate where final piece of current Module was placed. 
+		Calculate time until final piece appears on screen.
+		Start next module after last piece appears.
+------
+6-	Generate Ground Zero:
+		Should it just be the bottom of the screen? No need to generate anything?
