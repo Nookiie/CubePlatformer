@@ -6,17 +6,34 @@ public class GameTracker {
 
     }
 
-    private static int score = 0;
-    private static int scoreMultiplier = 1;
-    private static int scoreRate = 5;
-    private static int enemyRate = 1;
-    private static int spikesRate = 1;
-    private static int platformLevel = 0;
-
+    private static final int DEFAULT_SPEED = 1;
     private static final int DEFAULT_SCORE = 0;
+    private static final int DEFAULT_SCORE_RATE = 5;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
     private static final int DEFAULT_ENEMY_RATE = 1;
     private static final int DEFAULT_SPIKES_RATE = 1;
+    private static final int DEFAULT_PLATFORM_LEVEL = 0;
+
+    private static int speed = DEFAULT_SPEED;
+    private static int score = DEFAULT_SCORE;
+    private static int scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
+    private static int scoreRate = DEFAULT_SCORE_RATE;
+    private static int enemyRate = DEFAULT_ENEMY_RATE;
+    private static int spikesRate = DEFAULT_SPIKES_RATE;
+    private static int platformLevel = DEFAULT_PLATFORM_LEVEL;
+
+    private static boolean paused = false;
+    private static boolean godMode = false;
+    private static boolean spikesDisabled = false;
+    private static boolean enemiesDisabled = false;
+
+    public static int getSpeed() {
+        return speed;
+    }
+
+    public static void setSpeed(int speed) {
+        GameTracker.speed = speed;
+    }
 
     public void resetScore(){
         score = DEFAULT_SCORE;
@@ -93,5 +110,37 @@ public class GameTracker {
 
     public static void  updateScore(){
         score += scoreRate * scoreMultiplier;
+    }
+
+    public static boolean isPaused() {
+        return paused;
+    }
+
+    public static void togglePaused() {
+        paused = !paused;
+    }
+
+    public static boolean isGodMode() {
+        return godMode;
+    }
+
+    public static void toggleGodMode() {
+        godMode = !godMode;
+    }
+
+    public static boolean isSpikesDisabled() {
+        return spikesDisabled;
+    }
+
+    public static void toggleSpikesDisabled() {
+        spikesDisabled = !spikesDisabled;
+    }
+
+    public static boolean isEnemiesDisabled() {
+        return enemiesDisabled;
+    }
+
+    public static void toggleEnemiesDisabled() {
+        enemiesDisabled = !enemiesDisabled;
     }
 }
