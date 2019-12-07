@@ -4,7 +4,7 @@
 		fall():
 			after jump(), player falls until *collision*.
 ------
-2-	while falling-> cannot click!
+2-	while jumping/falling-> cannot click!
 ------
 3-	Collision:
 		1-with Spike		=dead
