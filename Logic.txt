@@ -21,6 +21,7 @@
 		Save the X coordinate where final piece of current Module was placed. 
 		Calculate time until final piece appears on screen.
 		Start next module after last piece appears.
+		ALTERNATIVE: Make short modules and wait 5 seconds between Module spawn
 ------
 7-	Generate Ground Zero:
 		Should it just be the bottom of the screen? No need to generate anything?
