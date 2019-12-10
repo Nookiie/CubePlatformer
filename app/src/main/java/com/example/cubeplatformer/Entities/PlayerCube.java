@@ -6,9 +6,9 @@ import android.graphics.Rect;
 
 import com.example.cubeplatformer.Common.GameTracker;
 
-public class Cube extends BaseEntity {
+public class PlayerCube extends BaseEntity {
 
-    public Cube (int x, int y, Bitmap bitmap, Rect cube, Paint paint) {
+    public PlayerCube(int x, int y, Bitmap bitmap, Rect cube, Paint paint) {
         super(x,y,bitmap,cube,paint);
     }
 }
