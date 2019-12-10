@@ -1,0 +1,30 @@
+1-	On click --> jump():
+		player.Y += ??px every ms for 0.5 seconds?
+	
+2-	fall():
+		if (*collision*==false && time after last *jump* > 0.5s) --> player.Y -= ??px every ms until *collision*.
+------
+3-	while jumping/falling --> cannot click!
+------
+4-	Collision:
+		1-with Spike		=dead
+		2-with side of Platform	=dead
+		3-with top  of Platform	=alive, player.Y=collision.Y until next jump/fall
+		4-with Ground Zero	=alive, player.y=0
+------
+5-	Rotation:
+		while collision==false --> playerImage.setRotation(playerImage.getRotation() + 5)
+		if (collision==True) --> rotation=0
+------
+------
+6-	Level Generation:
+		Save the X coordinate where final piece of current Module was placed. 
+		Calculate time until final piece appears on screen.
+		Start next module after last piece appears.
+		ALTERNATIVE: Make short modules and wait 5 seconds between Module spawn
+------
+7-	Generate Ground Zero:
+		Should it just be the bottom of the screen? No need to generate anything?
+------
+8- 	Lock phone orientation. In Manifest in the activity:
+		android:screenOrientation="landscape"
