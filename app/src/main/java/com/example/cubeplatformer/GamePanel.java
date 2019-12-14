@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
+        public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
         while(true){
             try{
