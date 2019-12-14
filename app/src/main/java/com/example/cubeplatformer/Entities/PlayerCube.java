@@ -22,4 +22,5 @@ public class PlayerCube extends BaseEntity {
     public void update() {
 
     }
+
 }

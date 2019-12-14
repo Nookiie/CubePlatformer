@@ -20,4 +20,5 @@ public class Spikes extends BaseEntity {
     public void update() {
 
     }
+
 }
