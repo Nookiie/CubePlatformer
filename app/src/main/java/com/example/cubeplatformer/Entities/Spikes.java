@@ -1,5 +1,5 @@
 package com.example.cubeplatformer.Entities;
-
+/*
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -22,3 +22,4 @@ public class Spikes extends BaseEntity {
     }
 
 }
+*/

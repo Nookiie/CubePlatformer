@@ -1,5 +1,6 @@
 package com.example.cubeplatformer.Entities;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,13 +9,13 @@ import android.graphics.Rect;
 
 public abstract class BaseEntity {
 
+    Context context;
     private Rect cube;
     private Paint paint;
 
-    public BaseEntity (int x, int y, Bitmap bitmap, Rect cube, Paint paint) {
+    public BaseEntity (int x, int y,Context context){//, Rect cube, Paint paint) {
         this.x = x;
         this.y = y;
-        this.bitmap = bitmap;
         this.cube = cube;
         this.paint = paint;
     }
@@ -65,6 +66,6 @@ public abstract class BaseEntity {
     }
 
     public abstract void draw(Canvas canvas);
-    public abstract void update();
+   // public abstract void update();
 
 }
