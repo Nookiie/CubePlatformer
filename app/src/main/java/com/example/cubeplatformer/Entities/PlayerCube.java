@@ -19,21 +19,23 @@ import androidx.annotation.RequiresApi;
 public class PlayerCube extends BaseEntity {
 
     public Bitmap bitmap;
-    int maxX;
-    int maxY;
+    //int maxX;
+    //int maxY;
     public int x;
     public int y;
+    public int startY;
 
     public PlayerCube(int sizeX, int sizeY,Context context){//, Rect cube, Paint paint) {
         super(sizeX,sizeY,context);
         bitmap= BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube1);
         this.context = context;
-        maxX = sizeX - bitmap.getWidth();
-        maxY = sizeY;
+       // maxX = sizeX - bitmap.getWidth();
+       // maxY = sizeY;
         x = 300;
-        y = sizeY - bitmap.getHeight() - 320;   //To see how the matrix bugs out
+        y = sizeY - bitmap.getHeight() - 220;   //To see how the matrix bugs out
                                                 //Should be ~120
+        startY=y;
     }
 
     @Override
@@ -44,8 +46,8 @@ public class PlayerCube extends BaseEntity {
    // @Override
     public void update(int jump) {
 
-        y -=10;             //This works for jumping
-        bitmap=RotateBitmap(bitmap,45);     //pass the angle you want to rotate
+        y -=jump;             //This works for jumping
+     //   bitmap=RotateBitmap(bitmap,45);     //pass the angle you want to rotate
 
     }
     public static Bitmap RotateBitmap(Bitmap source, float angle)
