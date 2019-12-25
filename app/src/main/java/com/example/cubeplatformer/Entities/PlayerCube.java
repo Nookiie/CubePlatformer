@@ -46,7 +46,7 @@ public class PlayerCube extends BaseEntity {
    // @Override
     public void update(int jump) {
 
-        y -=jump;             //This works for jumping
+        y -= jump;             //This works for jumping
      //   bitmap=RotateBitmap(bitmap,45);     //pass the angle you want to rotate
 
     }

@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.cubeplatformer.Common.GameTracker;
 import com.example.cubeplatformer.Entities.PlayerCube;
 import com.example.cubeplatformer.Entities.Spikes;
 import com.example.cubeplatformer.Entities.Star;
@@ -25,7 +26,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     ArrayList<Spikes> spikes = new ArrayList<>();
 
-
     Paint paint;
     SurfaceHolder surfaceHolder;
     Canvas canvas;
@@ -33,8 +33,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     int sizeX;
     int sizeY;
-    int jumpInt=0;
-    boolean jumpBool=false;
+    int jumpInt = 0;
+    boolean jumpBool = false;
 
     public IvanGameView(Context context, int sizeX, int sizeY) {
         super(context);
@@ -51,14 +51,11 @@ public class IvanGameView extends SurfaceView implements Runnable{
           //  spikes.add(new
          //           Spikes(sizeX, sizeY,getContext(),600));
 
-
-
         for(int i = 0 ; i < 98; i++){
             stars.add(new Star(sizeX, sizeY));
         }
 
         gameThread = new Thread(this);
-
         gameThread.start();
     }
 
@@ -69,9 +66,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
             update();
             draw();
 
-            if(timer%10==0) {
-                spikes.add(new
-                        Spikes(sizeX, sizeY,getContext(),700));
+            if(timer % 10 == 0) {
+                spikes.add(new Spikes(sizeX, sizeY,getContext(),700));
             }
         }
 
@@ -118,22 +114,21 @@ public class IvanGameView extends SurfaceView implements Runnable{
         for(Spikes spike:spikes){
             spike.update();
         }
-        if(jumpBool==true){
+
+        if (jumpBool){
             jumpInt++;
-            playercube.update(15);
+            playercube.update(GameTracker.getJumpHeight());
           //  jumpBool=false; //Delete this line after rotation fix
 
         }
-        if(jumpInt>=10){
-            jumpBool=false;
+        if(jumpInt >= 10){
+            jumpBool = false;
             jumpInt++;
-            playercube.update(-15);
+            playercube.update(-GameTracker.getJumpHeight());
         }
-        if(jumpInt==20){
-
-            jumpInt=0;
+        if(jumpInt >= 20){
+            jumpInt = 0;
         }
-
 
                 //^^^ THIS WORKS! Just commented because of rotation!!!!!!!!!!!!!!!!!!!!!!!!!!
                 //Platform.Java was commended. And more code too.
@@ -141,27 +136,23 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     private void frameRate() {
         try{
-            gameThread.sleep(33);
-
+            gameThread.sleep(10);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (playercube.y==playercube.startY){           //Disable even while in jump animation!
-            disabledTouch=false;                        //When attaching to PLATFORM, startY needs to change as well!
+        if (playercube.y == playercube.startY){           // Disable even while in jump animation!
+            disabledTouch = false;                        // When attaching to PLATFORM, startY needs to change as well!
         }
-        if(disabledTouch==false){
-            jumpBool=true;
-            disabledTouch=true;
+        if(disabledTouch == false){
+            jumpBool = true;
+            disabledTouch = true;
         }
         //playercube.update();
-
 
         return false;
     }

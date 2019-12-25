@@ -31,11 +31,11 @@ public class Spikes extends BaseEntity {
         maxX = sizeX;
         maxY = sizeY;
 
-        bitmap= BitmapFactory.decodeResource(context.getResources(),
+        bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.spike1);
-        x=startX;
-        startY= sizeY - bitmap.getHeight() - 120;
-        y=startY;
+        x = startX;
+        startY = sizeY - bitmap.getHeight() - 120;
+        y = startY;
     }
 
     @Override
