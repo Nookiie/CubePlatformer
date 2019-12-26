@@ -25,6 +25,10 @@ public abstract class BaseEntity {
 
     private Bitmap bitmap;
 
+    public BaseEntity(int x, int y, Bitmap bitmap, Rect cube, Paint paint) {
+
+    }
+
     public int getX() {
         return x;
     }

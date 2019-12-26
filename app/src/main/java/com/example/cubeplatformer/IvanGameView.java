@@ -23,7 +23,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
     boolean disabledTouch=false;
 
     ArrayList<Star> stars = new ArrayList<>();
-
     ArrayList<Spikes> spikes = new ArrayList<>();
 
     Paint paint;
@@ -136,7 +135,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     private void frameRate() {
         try{
-            gameThread.sleep(10);
+            gameThread.sleep(100 / GameTracker.getSpeed());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
