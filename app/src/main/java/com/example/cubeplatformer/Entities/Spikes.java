@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.cubeplatformer.Common.GameTracker;
 import com.example.cubeplatformer.R;
 
 public class Spikes extends BaseEntity {
@@ -22,7 +23,13 @@ public class Spikes extends BaseEntity {
     int maxX;
     int maxY;
 
-    int speed = 15;
+    int speed = GameTracker.getSpeed();
+
+
+    public Rect detectVert;
+    public Rect detectHor;
+
+
     public Spikes(int sizeX, int sizeY, Context context, int startX){//, Bitmap bitmap, Rect cube, Paint paint) {
         super(sizeX, sizeY,context);//, bitmap, cube, paint);
 
@@ -36,6 +43,20 @@ public class Spikes extends BaseEntity {
         x = startX;
         startY = sizeY - bitmap.getHeight() - 120;
         y = startY;
+
+
+        detectHor=new Rect(x,
+                y+bitmap.getHeight()-3,
+                x+bitmap.getWidth(),
+                y+bitmap.getHeight()
+        );
+
+        detectVert=new Rect(x+(bitmap.getWidth()/2)-2,
+                y-1,
+                x+(bitmap.getWidth()/2)+2,
+                y+bitmap.getHeight()
+        );
+
     }
 
     @Override
@@ -45,7 +66,19 @@ public class Spikes extends BaseEntity {
 
    // @Override
     public void update() {
+
         x -= speed;
+
+        detectHor.left= x;
+        detectHor.top= y+bitmap.getHeight()-3;
+        detectHor.right= x+bitmap.getWidth();
+        detectHor.bottom= y+bitmap.getHeight();
+
+        detectVert.left= x+(bitmap.getWidth()/2)-2;
+        detectVert.top= y-1;
+        detectVert.right= x+(bitmap.getWidth()/2)+2;
+        detectVert.bottom= y+bitmap.getHeight();
+
     }
 
 }
