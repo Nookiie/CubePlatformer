@@ -14,8 +14,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PlatformBuilder {
-    public PlatformBuilder(Context context){
+public class ModuleBuilder {
+    public ModuleBuilder(Context context){
         modulesMap(context);
     }
 
