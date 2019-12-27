@@ -1,6 +1,7 @@
 package com.example.cubeplatformer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -155,7 +156,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
             platform.update();
             if(Rect.intersects(platform.detectVert,playercube.detectCollision)){
                                             //Left Side minus Jump Height should NEVER intersect!
-                alive=false;
+                alive = false;
                 return;
             }
             if (Rect.intersects(platform.detectCollision, playercube.detectCollision)) {
@@ -163,30 +164,33 @@ public class IvanGameView extends SurfaceView implements Runnable{
                                                 //If hitting platform roof while falling, attach!
                     playercube.y = platform.y-playercube.bitmap.getHeight()-GameTracker.getJumpHeight();
                     attachAny = true;
-                    platform.platformAttach=true;
+                    platform.platformAttach = true;
                 }
                 else if(attachAny==false) {     //Extra insurance.
                     alive = false;
                 }
             }
 
-            if(                             //If Player leaves the roof of the platform!
+            if(
                     platform.platformAttach==true &&
-                    playercube.x>platform.x+platform.bitmap.getWidth()
-            ){
-                attachAny=false; platform.platformAttach=false; fall=true;
+                    playercube.x > platform.x + platform.bitmap.getWidth()
+            )
+            {
+                attachAny = false;
+                platform.platformAttach=false;
+                fall=true;
             }
         }
         // For loop ends!
 
         if (jumpBool) {                     //On Touch => remove states & go up!
-            attachAny=false;
-            fall=false;
+            attachAny = false;
+            fall = false;
             playercube.update(GameTracker.getJumpHeight());
 
-            if(playercube.y<=playercube.jumpYmax){      //On reaching maximum jump height => Fall!
-                jumpBool=false;
-                fall=true;
+            if(playercube.y <= playercube.jumpYmax){      //On reaching maximum jump height => Fall!
+                jumpBool = false;
+                fall = true;
             }
         }
 
@@ -202,6 +206,10 @@ public class IvanGameView extends SurfaceView implements Runnable{
         if(attachAny==true){                //Attach!
             fall=false;
             playercube.startY=playercube.y;
+        }
+        // Game Over State
+        if(!alive){
+
         }
     }
     //Update ends!

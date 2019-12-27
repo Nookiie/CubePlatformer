@@ -7,7 +7,7 @@ public class GameTracker {
     }
 
     private static final int DEFAULT_SPEED = 7;
-    private static final int DEFAULT_JUMP_HEIGHT = 15;
+    private static final int DEFAULT_JUMP_HEIGHT = 24;
     private static final int DEFAULT_SCORE = 0;
     private static final int DEFAULT_SCORE_RATE = 5;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
