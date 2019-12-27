@@ -6,11 +6,6 @@ import android.graphics.Bitmap;
 import com.example.cubeplatformer.Entities.Platform;
 import com.example.cubeplatformer.Entities.PlatformModule;
 import com.example.cubeplatformer.Entities.Spikes;
-import com.example.cubeplatformer.GameActivity;
-import com.example.cubeplatformer.MainActivity;
-import com.example.cubeplatformer.MainThread;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,7 +17,8 @@ public class ModuleBuilder {
     Random RNGModulePicker = new Random();
     ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
 
-    public void modulesMap(Context context){ // This is where all the modules will be built and specified (spikes and platforms: x,y, size, etc..)
+    // This is where all the modules will be built and specified (spikes and platforms: x,y, size, etc..)
+    public void modulesMap(Context context){
         ArrayList<Platform> platformBuilder = new ArrayList<Platform>();
         ArrayList<Spikes> spikesBuilder = new ArrayList<Spikes>();
 
@@ -38,7 +34,8 @@ public class ModuleBuilder {
         cleanUpBuildersAndSave("moduleB", platformBuilder, spikesBuilder);
     }
 
-    public PlatformModule getRandomModule(ArrayList<PlatformModule> modules){ // Random Module Picker
+    // Random Module Picker
+    public PlatformModule getRandomModule(ArrayList<PlatformModule> modules){
         int randomNumber = RNGModulePicker.nextInt(modules.size() - 1);
 
         return modules.get(randomNumber);
