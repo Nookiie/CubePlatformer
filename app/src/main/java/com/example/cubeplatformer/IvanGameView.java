@@ -218,7 +218,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     private void frameRate() {
         try{
             //     gameThread.sleep(100 / GameTracker.getSpeed());
-            gameThread.sleep(33);           //<- What I used... Haven't tested ^^^^
+            gameThread.sleep(10);           //<- What I used... Haven't tested ^^^^
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -231,7 +231,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
             disabledTouch = false;                        // When attaching to PLATFORM, startY needs to change as well!
         }
         if(disabledTouch == false){
-            playercube.jumpYmax=playercube.y-120;         //Update max jump height!
+            playercube.jumpYmax = playercube.y - 120;         //Update max jump height!
             jumpBool = true;
 
             disabledTouch = true;
