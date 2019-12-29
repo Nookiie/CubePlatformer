@@ -20,8 +20,10 @@ public class Platform extends BaseEntity {
     //int startX=300;       //Take From external class LevelBuilder OR something.
     int startY;
     int finalX=-10;         //When to delete! UNUSED!!!
+    public boolean flag=true;
 
     public boolean platformAttach=false;
+    public boolean multiAttach=false;
 
     int maxX;
     int maxY;
@@ -29,6 +31,8 @@ public class Platform extends BaseEntity {
     int speed = GameTracker.getSpeed();
 
     public Rect detectVert;
+    public Rect detectBot;
+    public Rect detectTop;
     public Rect detectCollision;
 
 
@@ -42,19 +46,24 @@ public class Platform extends BaseEntity {
         maxY = sizeY;
 
         bitmap = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.platform1);
+                R.drawable.platform2);
         x = startX;
         //startY = sizeY - bitmap.getHeight() - 120;
         y = startY;
 
 
         detectCollision=new Rect(x,y,x+bitmap.getWidth(),y+bitmap.getHeight());
-/*
-        detectTop=new Rect(x+2,
-                y,
+
+        detectBot=new Rect(x,
+                y+bitmap.getHeight()-5,
+                x+bitmap.getWidth(),
+                y+bitmap.getHeight()-1
+        );
+        detectTop=new Rect(x,
+                y-3,
                 x+bitmap.getWidth(),
                 y
-        );*/
+        );
 
         detectVert=new Rect(x,
                 y+ GameTracker.getJumpHeight()+1,
@@ -75,19 +84,24 @@ public class Platform extends BaseEntity {
     public void update() {
 
         x -= speed;
-/*
-        detectTop.left= x+2;
-        detectTop.top= y;
+
+        detectBot.left= x+2;
+        detectBot.top= y+bitmap.getHeight()-5;
+        detectBot.right= x+bitmap.getWidth();
+        detectBot.bottom= y+bitmap.getHeight()-1;
+
+        detectTop.left= x+1;
+        detectTop.top= y-10;
         detectTop.right= x+bitmap.getWidth();
         detectTop.bottom= y;
-*/
+
         detectVert.left= x;
-        detectVert.top= y+16;
-        detectVert.right= x+16;
+        detectVert.top= y;
+        detectVert.right= x+1;
         detectVert.bottom= y+bitmap.getHeight();
 
 
-        detectCollision.left=x;
+        detectCollision.left=x+9;
         detectCollision.top=y;
         detectCollision.right=x+bitmap.getWidth();
         detectCollision.bottom=y+bitmap.getHeight();
