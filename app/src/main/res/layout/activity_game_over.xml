@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameOverActivity">
+
+    <TextView
+        android:id="@+id/gameOverTextView"
+        android:layout_width="267dp"
+        android:layout_height="139dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="92dp"
+        android:text="Game Over"
+        android:textSize="50sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreHeaderTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:text="Your Score:"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverTextView" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="114dp"
+        android:layout_height="41dp"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/scoreHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gameOverTextView" />
+
+    <Button
+        android:id="@+id/retryBtn"
+        android:layout_width="165dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="76dp"
+        android:text="Try Again"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreHeaderTextView" />
+
+    <Button
+        android:id="@+id/menuBtn"
+        android:layout_width="165dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="76dp"
+        android:text="Back To Menu"
+        app:layout_constraintStart_toEndOf="@+id/retryBtn"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

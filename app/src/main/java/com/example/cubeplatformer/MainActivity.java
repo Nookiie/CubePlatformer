@@ -20,6 +20,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnStartGame = findViewById(R.id.buttonStart);
         btnStartGame.setOnClickListener(MainActivity.this);
+
+        boolean isRetry = getIntent().getBooleanExtra("retry", false);
+
+        if(isRetry){
+            btnStartGame.performClick();
+        }
+
     }
 
     /*

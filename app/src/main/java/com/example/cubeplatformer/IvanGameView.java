@@ -17,14 +17,17 @@ import com.example.cubeplatformer.Entities.Spikes;
 import com.example.cubeplatformer.Entities.Star;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class IvanGameView extends SurfaceView implements Runnable{
 
     boolean detected=false;
 
 
+
     boolean alive;
     int timer;
+    int score = GameTracker.getScore();
     int delayfall=0;
     int attachcount=0;
     PlayerCube playercube;
@@ -39,6 +42,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
+    Collection<Integer> scores = new ArrayList<>();
 
     Paint paint;
     SurfaceHolder surfaceHolder;
@@ -48,7 +52,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     int sizeX;
     int sizeY;
     boolean jumpBool = false;
-    public boolean previoulyAttached=false;
+    public boolean previoulyAttached = false;
 
     int stop=270;
 
@@ -105,6 +109,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
                 platforms.add(new Platform(sizeX, sizeY, getContext(), 700,playercube.y-60));
             }*/
         }
+        scores.add(score);
     }
     //Run Ends!
 
@@ -180,6 +185,10 @@ public class IvanGameView extends SurfaceView implements Runnable{
     private void update() {
 
         timer++;
+
+        if(timer % GameTracker.getScoreRate() == 0){
+            score += GameTracker.getScore();
+        }
 
         for(Spikes spike:spikes){
             spike.update();
@@ -343,7 +352,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
             playercube.Rotation();
         }
 
-        if((playercube.y+playercube.bitmap.getHeight())>=floor&&fall==true){    //Attach to floor!
+        if((playercube.y + playercube.bitmap.getHeight())>=floor&&fall==true){    //Attach to floor!
 
 
             attachAny=true;
@@ -376,11 +385,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
     private void frameRate() {
         try{
             //     gameThread.sleep(100 / GameTracker.getSpeed());
-<<<<<<< HEAD
-            gameThread.sleep(10);           //<- What I used... Haven't tested ^^^^
-=======
+
             gameThread.sleep(6);           //<- What I used... Haven't tested ^^^^
->>>>>>> 4eda694dec2402165b8320d8742c902a557be453
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -393,11 +399,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
             disabledTouch = false;                        // When attaching to PLATFORM, startY needs to change as well!
         }
         if(disabledTouch == false){
-<<<<<<< HEAD
-            playercube.jumpYmax = playercube.y - 120;         //Update max jump height!
-=======
-            playercube.jumpYmax=playercube.y-GameTracker.getMaxJump();         //Update max jump height!
->>>>>>> 4eda694dec2402165b8320d8742c902a557be453
+
+            playercube.jumpYmax=playercube.y - GameTracker.getMaxJump();         //Update max jump height!
             jumpBool = true;
 
             disabledTouch = true;

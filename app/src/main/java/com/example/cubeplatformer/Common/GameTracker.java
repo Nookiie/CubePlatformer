@@ -8,9 +8,9 @@ public class GameTracker {
 
     private static final int DEFAULT_SPEED = 6;
     private static final int DEFAULT_JUMP_HEIGHT = 10;      // EVERY FRAME JUMP INCREASES BY THIS!
-    private static final int DEFAULT_MAX_JUMP=120;
-    private static final int DEFAULT_SCORE = 5;
-    private static final int DEFAULT_SCORE_RATE = 5;
+    private static final int DEFAULT_MAX_JUMP = 250;
+    private static final int DEFAULT_SCORE = 2;
+    private static final int DEFAULT_SCORE_RATE = 15;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
     private static final int DEFAULT_ENEMY_RATE = 1;
     private static final int DEFAULT_SPIKES_RATE = 1;
