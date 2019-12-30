@@ -131,23 +131,26 @@ public class IvanGameView extends SurfaceView implements Runnable{
         if(surfaceHolder.getSurface().isValid()){
             canvas = surfaceHolder.lockCanvas();
 
-            canvas.drawText("Already: " +itsAttachedAlready,// attachcount,//GameTracker.getScore(),
+            canvas.drawText("Already: " + itsAttachedAlready,// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     80,
                     paint);
-            canvas.drawText("count: " +attachcount,// attachcount,//GameTracker.getScore(),
+            canvas.drawText("count: " + attachcount,// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     110,
                     paint);
-            canvas.drawText("fall: " +fall,// attachcount,//GameTracker.getScore(),
+            canvas.drawText("fall: " + fall,// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     140,
                     paint);
-            canvas.drawText("det: " +detected,// attachcount,//GameTracker.getScore(),
+            canvas.drawText("det: " + detected,// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     170,
                     paint);
-
+            canvas.drawText("score: " + score,// attachcount,//GameTracker.getScore(),
+                    canvas.getWidth() / 2 ,
+                    200,
+                    paint);
 
             canvas.drawColor(Color.argb(200,131,159,255));
 
