@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cubeplatformer.Common.GameTracker;
+
 public class GameOverActivity extends AppCompatActivity {
 
     TextView scoreTextView;
@@ -21,6 +23,8 @@ public class GameOverActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         btnRetry = findViewById(R.id.retryBtn);
         btnMenu = findViewById(R.id.menuBtn);
+
+        scoreTextView.setText(String.valueOf(GameTracker.getHighScore()));
     }
 
     View.OnClickListener onClick = new View.OnClickListener() {

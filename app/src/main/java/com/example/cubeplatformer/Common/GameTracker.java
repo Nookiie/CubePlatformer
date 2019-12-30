@@ -1,5 +1,9 @@
 package com.example.cubeplatformer.Common;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class GameTracker {
 
     public GameTracker() {
@@ -29,7 +33,8 @@ public class GameTracker {
     private static boolean paused = false;
     private static boolean godMode = false;
     private static boolean spikesDisabled = false;
-    private static boolean enemiesDisabled = false;
+
+    public static Collection<Integer> scores = new ArrayList<>();
 
     public static int getSpeed() {
         return speed;
@@ -43,14 +48,9 @@ public class GameTracker {
         score = DEFAULT_SCORE;
     }
 
-    public void resetEnemyRate(){
-        enemyRate = DEFAULT_ENEMY_RATE;
-    }
-
     public void resetSpikesRate(){
         spikesRate = DEFAULT_SPIKES_RATE;
     }
-
 
     public void resetScoreMultiplier(){
         scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
@@ -140,15 +140,6 @@ public class GameTracker {
         spikesDisabled = !spikesDisabled;
     }
 
-    public static boolean isEnemiesDisabled() {
-        return enemiesDisabled;
-    }
-
-    public static void toggleEnemiesDisabled() {
-        enemiesDisabled = !enemiesDisabled;
-    }
-
-
     public static int getJumpHeight() {
         return jumpHeight;
     }
@@ -159,6 +150,14 @@ public class GameTracker {
 
     public static void setJumpHeight(int jumpHeight) {
         GameTracker.jumpHeight = jumpHeight;
+    }
+
+    public static int getHighScore(){
+        if(scores.isEmpty()){
+            return 0;
+        }
+
+        return Collections.max(scores);
     }
 
 }

@@ -18,12 +18,11 @@ import com.example.cubeplatformer.Entities.Star;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class IvanGameView extends SurfaceView implements Runnable{
 
     boolean detected=false;
-
-
 
     boolean alive;
     int timer;
@@ -42,7 +41,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
-    Collection<Integer> scores = new ArrayList<>();
 
     Paint paint;
     SurfaceHolder surfaceHolder;
@@ -90,7 +88,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     @Override
     public void run() {
-        while(alive){
+        while(alive || GameTracker.isGodMode()){
             frameRate();
             update();
             draw();
@@ -109,7 +107,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
                 platforms.add(new Platform(sizeX, sizeY, getContext(), 700,playercube.y-60));
             }*/
         }
-        scores.add(score);
+        //Game Over State
+        GameTracker.scores.add(score);
     }
     //Run Ends!
 
@@ -187,7 +186,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
         timer++;
 
         if(timer % GameTracker.getScoreRate() == 0){
-            score += GameTracker.getScore();
+            score++;
         }
 
         for(Spikes spike:spikes){
@@ -373,10 +372,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
             playercube.defaultrot();
 
             playercube.startY=playercube.y;
-        }
-        // Game Over State
-        if(!alive){
-
         }
     }
     //Update ends!
