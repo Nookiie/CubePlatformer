@@ -5,45 +5,61 @@ import android.graphics.Bitmap;
 
 import com.example.cubeplatformer.Entities.Platform;
 import com.example.cubeplatformer.Entities.PlatformModule;
+import com.example.cubeplatformer.Entities.PlayerCube;
 import com.example.cubeplatformer.Entities.Spikes;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class ModuleBuilder {
+    private static  Random RNGModulePicker = new Random();
+    public static final ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
+
     public ModuleBuilder(Context context){
-        modulesMap(context);
+
     }
 
-    Random RNGModulePicker = new Random();
-    ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
-
     // This is where all the modules will be built and specified (spikes and platforms: x,y, size, etc..)
-    public void modulesMap(Context context){
+    public static void modulesMap(Context context, int sizeX, int sizeY, PlayerCube playerCube){
+        modules.clear();
+
         ArrayList<Platform> platformBuilder = new ArrayList<Platform>();
         ArrayList<Spikes> spikesBuilder = new ArrayList<Spikes>();
 
-        spikesBuilder.add(new Spikes(12,12, context,700));
-        spikesBuilder.add(new Spikes(60,80, context, 800));
-        spikesBuilder.add(new Spikes(50,90,context,900));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 120));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, playerCube.x + 130));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 140));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,playerCube.x + 100,10));
 
         cleanUpBuildersAndSave("moduleA", platformBuilder, spikesBuilder);
 
-        spikesBuilder.add(new Spikes(25,13,context,700));
-        spikesBuilder.add(new Spikes(15, 23,context,800));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 150));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 170));
+        platformBuilder.add(new Platform(sizeX,sizeY, context,playerCube.x + 540, 450));
 
         cleanUpBuildersAndSave("moduleB", platformBuilder, spikesBuilder);
     }
 
     // Random Module Picker
-    public PlatformModule getRandomModule(ArrayList<PlatformModule> modules){
-        int randomNumber = RNGModulePicker.nextInt(modules.size() - 1);
+    public static PlatformModule getRandomModule(){
+        int randomNumber = RNGModulePicker.nextInt(modules.size());
 
         return modules.get(randomNumber);
     }
+    private static void cleanUpBuildersAndSave(String name, ArrayList<Platform> platforms, ArrayList<Spikes> spikes){
+        ArrayList<Platform> storedPlatforms = new ArrayList<>();
+        ArrayList<Spikes> storedSpikes = new ArrayList<>();
 
+        for(Platform platform : platforms){
+            storedPlatforms.add(platform);
+        }
 
-    private void cleanUpBuildersAndSave(String name, ArrayList<Platform> platforms, ArrayList<Spikes> spikes){
-        modules.add(new PlatformModule(name, spikes, platforms));
+        for(Spikes spike : spikes){
+            storedSpikes.add(spike);
+        }
+
+        modules.add(new PlatformModule(name, storedSpikes, storedPlatforms));
 
         spikes.clear();
         platforms.clear();

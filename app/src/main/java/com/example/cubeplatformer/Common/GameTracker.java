@@ -16,22 +16,18 @@ public class GameTracker {
     private static final int DEFAULT_SCORE = 2;
     private static final int DEFAULT_SCORE_RATE = 15;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
-    private static final int DEFAULT_ENEMY_RATE = 1;
-    private static final int DEFAULT_SPIKES_RATE = 1;
-    private static final int DEFAULT_PLATFORM_LEVEL = 0;
+    private static final int DEFAULT_MODULE_RATE = 150;
 
     private static int jumpHeight = DEFAULT_JUMP_HEIGHT;
-    private static int maxJump=DEFAULT_MAX_JUMP;
+    private static int maxJump = DEFAULT_MAX_JUMP;
     private static int speed = DEFAULT_SPEED;
     private static int score = DEFAULT_SCORE;
     private static int scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
     private static int scoreRate = DEFAULT_SCORE_RATE;
-    private static int enemyRate = DEFAULT_ENEMY_RATE;
-    private static int spikesRate = DEFAULT_SPIKES_RATE;
-    private static int platformLevel = DEFAULT_PLATFORM_LEVEL;
+    private static int moduleRate = DEFAULT_MODULE_RATE;
 
     private static boolean paused = false;
-    private static boolean godMode = false;
+    private static boolean godMode = false; // Functional, use for debug purposes
     private static boolean spikesDisabled = false;
 
     public static Collection<Integer> scores = new ArrayList<>();
@@ -48,10 +44,6 @@ public class GameTracker {
         score = DEFAULT_SCORE;
     }
 
-    public void resetSpikesRate(){
-        spikesRate = DEFAULT_SPIKES_RATE;
-    }
-
     public void resetScoreMultiplier(){
         scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
     }
@@ -64,22 +56,6 @@ public class GameTracker {
         this.scoreMultiplier = scoreMultiplier;
     }
 
-    public int getEnemyRate() {
-        return enemyRate;
-    }
-
-    public void setEnemyRate(int enemyRate) {
-        this.enemyRate = enemyRate;
-    }
-
-    public int getSpikesRate() {
-        return spikesRate;
-    }
-
-    public void setSpikesRate(int spikesRate) {
-        this.spikesRate = spikesRate;
-    }
-
     public static int getScore() {
         return score;
     }
@@ -88,28 +64,12 @@ public class GameTracker {
         this.score = score;
     }
 
-    public int getLevel() {
-        return platformLevel;
-    }
-
-    public void setLevel(int level) {
-        this.platformLevel = level;
-    }
-
     public static int getScoreRate() {
         return scoreRate;
     }
 
     public static void setScoreRate(int scoreRate) {
         GameTracker.scoreRate = scoreRate;
-    }
-
-    public static int getPlatformLevel() {
-        return platformLevel;
-    }
-
-    public static void setPlatformLevel(int platformLevel) {
-        GameTracker.platformLevel = platformLevel;
     }
 
     public static void  updateScore(){
@@ -151,6 +111,10 @@ public class GameTracker {
     public static void setJumpHeight(int jumpHeight) {
         GameTracker.jumpHeight = jumpHeight;
     }
+
+    public static int getModuleRate() {  return moduleRate; }
+
+    public static void setModuleRate(int moduleRate) { GameTracker.moduleRate = moduleRate; }
 
     public static int getHighScore(){
         if(scores.isEmpty()){

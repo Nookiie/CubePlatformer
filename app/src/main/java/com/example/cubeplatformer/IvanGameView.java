@@ -1,7 +1,6 @@
 package com.example.cubeplatformer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,14 +10,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.cubeplatformer.Common.GameTracker;
+import com.example.cubeplatformer.Common.ModuleBuilder;
 import com.example.cubeplatformer.Entities.Platform;
+import com.example.cubeplatformer.Entities.PlatformModule;
 import com.example.cubeplatformer.Entities.PlayerCube;
 import com.example.cubeplatformer.Entities.Spikes;
 import com.example.cubeplatformer.Entities.Star;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class IvanGameView extends SurfaceView implements Runnable{
 
@@ -93,10 +92,25 @@ public class IvanGameView extends SurfaceView implements Runnable{
             update();
             draw();
 
-
             // For spikes!
             if(timer % 150 == 0) {
-                spikes.add(new Spikes(sizeX, sizeY,getContext(),900));
+                spikes.add(new Spikes(sizeX, sizeY, getContext(),900));
+            }
+
+
+            // Module Spawn
+            if(timer % GameTracker.getModuleRate() == 0){
+                // Initializing the Module Builder
+                ModuleBuilder.modulesMap(getContext(), sizeX, sizeY, playercube);
+                PlatformModule chosenModule = ModuleBuilder.getRandomModule();
+
+                for(Platform platform : chosenModule.platforms){
+                    platforms.add(platform);
+                }
+
+                for(Spikes spike : chosenModule.spikes){
+                    spikes.add(spike);
+                }
             }
 /*
                                 //Makes first 2 platforms are really close to show multi-level jump!
@@ -182,7 +196,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
     }
 
     private void update() {
-
         timer++;
 
         if(timer % GameTracker.getScoreRate() == 0){
@@ -375,7 +388,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
         }
     }
     //Update ends!
-
 
     private void frameRate() {
         try{
