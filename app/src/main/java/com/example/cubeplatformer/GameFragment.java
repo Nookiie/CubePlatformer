@@ -1,6 +1,7 @@
 package com.example.cubeplatformer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,5 +31,4 @@ public class GameFragment extends Fragment {
 
         return ivanGameView;
     }
-
 }

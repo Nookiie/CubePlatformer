@@ -1,10 +1,12 @@
 package com.example.cubeplatformer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -128,6 +130,10 @@ public class IvanGameView extends SurfaceView implements Runnable{
         }
         //Game Over State
         GameTracker.scores.add(score);
+
+        Intent intent = new Intent(getContext(), GameOverActivity.class);
+        intent.putExtra("score", score);
+        getContext().startActivity(intent);
     }
     //Run Ends!
 
@@ -147,7 +153,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
                     canvas.getWidth() / 2 ,
                     140,
                     paint);
-
             canvas.drawText("det: " + detected,// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     170,

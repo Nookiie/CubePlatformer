@@ -25,6 +25,9 @@ public class GameOverActivity extends AppCompatActivity {
         btnMenu = findViewById(R.id.menuBtn);
 
         scoreTextView.setText(String.valueOf(GameTracker.getHighScore()));
+
+        btnRetry.setOnClickListener(onClick);
+        btnMenu.setOnClickListener(onClick);
     }
 
     View.OnClickListener onClick = new View.OnClickListener() {

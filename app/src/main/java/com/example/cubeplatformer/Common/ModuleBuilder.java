@@ -15,10 +15,10 @@ import java.util.Random;
 public class ModuleBuilder {
     private static  Random RNGModulePicker = new Random();
     public static final ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
-    public static int canvas=855;
-    static int oneSpace=45;
+    public static int canvas = 855;
+    static int oneSpace = 45;
     static int randomNumber;
-    static int previousNumber=999;
+    static int previousNumber = 999;
 
     public ModuleBuilder(Context context){
 
@@ -75,10 +75,10 @@ public class ModuleBuilder {
     // Random Module Picker
     public static PlatformModule getRandomModule(){
         randomNumber = RNGModulePicker.nextInt(modules.size());
-        while(randomNumber==previousNumber){
+        while(randomNumber == previousNumber){
             randomNumber = RNGModulePicker.nextInt(modules.size());
         }
-        previousNumber=randomNumber;
+        previousNumber = randomNumber;
         return modules.get(randomNumber);
 
 
@@ -102,9 +102,10 @@ public class ModuleBuilder {
         platforms.clear();
     }
     public static int place(int num){
-        return (canvas+(num*45));
+        return (canvas + (num * 45));
     }
+
     public static int level(int num){
-        return 315-(num*45);
+        return 315 - (num * 45);
     }
 }
