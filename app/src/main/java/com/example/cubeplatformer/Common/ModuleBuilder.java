@@ -15,6 +15,10 @@ import java.util.Random;
 public class ModuleBuilder {
     private static  Random RNGModulePicker = new Random();
     public static final ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
+    public static int canvas=855;
+    static int oneSpace=45;
+    static int randomNumber;
+    static int previousNumber=999;
 
     public ModuleBuilder(Context context){
 
@@ -27,25 +31,58 @@ public class ModuleBuilder {
         ArrayList<Platform> platformBuilder = new ArrayList<Platform>();
         ArrayList<Spikes> spikesBuilder = new ArrayList<Spikes>();
 
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 120));
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context, playerCube.x + 130));
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 140));
-        platformBuilder.add(new Platform(sizeX, sizeY, context,playerCube.x + 100,10));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(0),level(0)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(4),level(0)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(8),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(12),level(1)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(1),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(2),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(3),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(5),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(6),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(7),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(8),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(9),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(10),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(11),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(12),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context,place(13),level(0)));
 
         cleanUpBuildersAndSave("moduleA", platformBuilder, spikesBuilder);
 
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 150));
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context,playerCube.x + 170));
-        platformBuilder.add(new Platform(sizeX,sizeY, context,playerCube.x + 540, 450));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(0),level(0)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(4),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(5),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(6),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(7),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(8),level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context,place(11),level(2)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(1),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(2),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(3),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(6),level(2)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(9),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(10),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(11),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13),level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14),level(0)));
 
         cleanUpBuildersAndSave("moduleB", platformBuilder, spikesBuilder);
+
     }
 
     // Random Module Picker
     public static PlatformModule getRandomModule(){
-        int randomNumber = RNGModulePicker.nextInt(modules.size());
-
+        randomNumber = RNGModulePicker.nextInt(modules.size());
+        while(randomNumber==previousNumber){
+            randomNumber = RNGModulePicker.nextInt(modules.size());
+        }
+        previousNumber=randomNumber;
         return modules.get(randomNumber);
+
+
+       // return modules.get(randomNumber);
     }
     private static void cleanUpBuildersAndSave(String name, ArrayList<Platform> platforms, ArrayList<Spikes> spikes){
         ArrayList<Platform> storedPlatforms = new ArrayList<>();
@@ -63,5 +100,11 @@ public class ModuleBuilder {
 
         spikes.clear();
         platforms.clear();
+    }
+    public static int place(int num){
+        return (canvas+(num*45));
+    }
+    public static int level(int num){
+        return 315-(num*45);
     }
 }
