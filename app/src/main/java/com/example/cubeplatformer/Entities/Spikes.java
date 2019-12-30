@@ -17,11 +17,11 @@ public class Spikes extends BaseEntity {
     public int x;
     public int y;
     //int startX=300;     //Take From external class LevelBuilder OR something.
-    int startY;
     int finalX=-10;
+    public boolean isAlive=true;
 
-    int maxX;
-    int maxY;
+   // int maxX;
+   // int maxY;
 
     int speed = GameTracker.getSpeed();
 
@@ -30,18 +30,18 @@ public class Spikes extends BaseEntity {
     public Rect detectHor;
 
 
-    public Spikes(int sizeX, int sizeY, Context context, int startX){//, Bitmap bitmap, Rect cube, Paint paint) {
+    public Spikes(int sizeX, int sizeY, Context context, int startX,int startY){//, Bitmap bitmap, Rect cube, Paint paint) {
         super(sizeX, sizeY,context);//, bitmap, cube, paint);
 
         this.context = context;
 
-        maxX = sizeX;
-        maxY = sizeY;
+    //    maxX = sizeX;
+    //    maxY = sizeY;
 
         bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.spike2);
         x = startX;
-        startY = sizeY - bitmap.getHeight() - 120;
+        //startY = sizeY - bitmap.getHeight() - 120;
         y = startY;
 
 
@@ -69,13 +69,13 @@ public class Spikes extends BaseEntity {
 
         x -= speed;
 
-        detectHor.left= x;
+        detectHor.left= x+1;
         detectHor.top= y+bitmap.getHeight()-1;
         detectHor.right= x+bitmap.getWidth();
         detectHor.bottom= y+bitmap.getHeight();
 
         detectVert.left= x+(bitmap.getWidth()/2);
-        detectVert.top= y+10;
+        detectVert.top= y+15;
         detectVert.right= x+(bitmap.getWidth()/2);
         detectVert.bottom= y+bitmap.getHeight();
 

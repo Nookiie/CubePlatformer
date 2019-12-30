@@ -18,15 +18,16 @@ public class Platform extends BaseEntity {
     public int x;
     public int y;
     //int startX=300;       //Take From external class LevelBuilder OR something.
-    int startY;
-    int finalX=-10;         //When to delete! UNUSED!!!
+   // int startY;
+   // int finalX=-10;         //When to delete! UNUSED!!!
     public boolean flag=true;
+    public boolean isAlive=true;
 
     public boolean platformAttach=false;
     public boolean multiAttach=false;
 
-    int maxX;
-    int maxY;
+   // int maxX;
+   // int maxY;
 
     int speed = GameTracker.getSpeed();
 
@@ -42,8 +43,8 @@ public class Platform extends BaseEntity {
 
         this.context = context;
 
-        maxX = sizeX;
-        maxY = sizeY;
+      //  maxX = sizeX;
+      //  maxY = sizeY;
 
         bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.platform2);
@@ -66,7 +67,7 @@ public class Platform extends BaseEntity {
         );
 
         detectVert=new Rect(x,
-                y+ GameTracker.getJumpHeight()+1,
+                y+10,
                 x+GameTracker.getJumpHeight()+1,
                 y+bitmap.getHeight()
         );
@@ -96,7 +97,7 @@ public class Platform extends BaseEntity {
         detectTop.bottom= y;
 
         detectVert.left= x;
-        detectVert.top= y;
+        detectVert.top= y+10;
         detectVert.right= x+1;
         detectVert.bottom= y+bitmap.getHeight();
 

@@ -31,6 +31,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     PlayerCube playercube;
     boolean disabledTouch=false;
     boolean itsAttachedAlready=false;
+    boolean firstModule=true;
 
     boolean attachAny=false;
     boolean fall=false;
@@ -64,14 +65,14 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
         //spikes.add(new Spikes(sizeX, sizeY,getContext(),745));
         //spikes.add(new Spikes(sizeX, sizeY,getContext(),700));
-
+/*
         platforms.add(new Platform(sizeX, sizeY, getContext(), 845, 270));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 700, 315));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 1145, 315));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 1100, 315));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 1545, 270));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 1400, 315));
-
+*/
 
         playercube = new PlayerCube(sizeX, sizeY,context);
         surfaceHolder = getHolder();
@@ -94,15 +95,18 @@ public class IvanGameView extends SurfaceView implements Runnable{
             draw();
 
             // For spikes!
+            /*
             if(timer % 150 == 0) {
                 spikes.add(new Spikes(sizeX, sizeY, getContext(),900));
             }
-
+           */
 
             // Module Spawn
-            if(timer % GameTracker.getModuleRate() == 0){
+            if(timer % GameTracker.getModuleRate() == 0||firstModule){
+                firstModule=false;
                 // Initializing the Module Builder
                 ModuleBuilder.modulesMap(getContext(), sizeX, sizeY, playercube);
+
                 PlatformModule chosenModule = ModuleBuilder.getRandomModule();
 
                 for(Platform platform : chosenModule.platforms){
@@ -143,11 +147,11 @@ public class IvanGameView extends SurfaceView implements Runnable{
                     canvas.getWidth() / 2 ,
                     140,
                     paint);
-            canvas.drawText("det: " +detected,// attachcount,//GameTracker.getScore(),
+           /* canvas.drawText("det: " +spikes.size(),// attachcount,//GameTracker.getScore(),
                     canvas.getWidth() / 2 ,
                     170,
                     paint);
-
+            */
 
             canvas.drawColor(Color.argb(200,131,159,255));
 
@@ -196,6 +200,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     }
 
     private void update() {
+
         timer++;
 
         if(timer % GameTracker.getScoreRate() == 0){
@@ -204,6 +209,9 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
         for(Spikes spike:spikes){
             spike.update();
+            if(spike.x+spike.bitmap.getWidth()<0){
+                spike.isAlive=false;
+            }
             if (
                             Rect.intersects(spike.detectHor, playercube.detectCollision) ||
                             Rect.intersects(spike.detectVert, playercube.detectCollision)
@@ -213,8 +221,12 @@ public class IvanGameView extends SurfaceView implements Runnable{
         }
 
         for (Platform platform : platforms) {
+
             platform.update();
 
+            if(platform.x+platform.bitmap.getWidth()<0){
+                platform.isAlive=false;
+            }
             attachcount=0;
 
             if(timer%2==0) {                                    //Fixes stuttering when calculating
@@ -249,14 +261,14 @@ public class IvanGameView extends SurfaceView implements Runnable{
                            !Rect.intersects(platform.detectVert,playercube.detectCollision)
             )
             {
-                if(jumpBool&&playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()+1){
-                    detected=true;      //This might actually never proc
+                if(jumpBool&&playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()+1
+                        &&playercube.y>platform.y-15){
+                    detected=true;
                     alive=false;
                 }
                 if(jumpBool==false) {       //if colliding and not going up, attach! Very important
                     platform.multiAttach = true;
 
-                    detected = true;
                     attachAny = true;
                     playercube.defaultrot();
 
@@ -355,6 +367,16 @@ public class IvanGameView extends SurfaceView implements Runnable{
             playercube.Rotation();
             playercube.y=floor-playercube.bitmap.getHeight();
             playercube.startY=playercube.y;
+        }
+        for(int i=0; i<platforms.size();i++){
+            if(platforms.get(0).isAlive==false){
+                platforms.remove(0);
+            }
+        }
+        for(int i=0; i<spikes.size();i++){
+            if(spikes.get(0).isAlive==false){
+                spikes.remove(0);
+            }
         }
     }
     //Update ends!
