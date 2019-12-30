@@ -12,7 +12,7 @@ import com.example.cubeplatformer.Common.GameTracker;
 
 public class GameOverActivity extends AppCompatActivity {
 
-    TextView scoreTextView;
+    TextView currentScoreTextView, highScoreTextView;
     Button btnRetry, btnMenu;
 
     @Override
@@ -20,11 +20,13 @@ public class GameOverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
-        scoreTextView = findViewById(R.id.scoreTextView);
+        currentScoreTextView = findViewById(R.id.scoreTextView);
+        highScoreTextView = findViewById(R.id.highScore);
         btnRetry = findViewById(R.id.retryBtn);
         btnMenu = findViewById(R.id.menuBtn);
 
-        scoreTextView.setText(String.valueOf(GameTracker.getHighScore()));
+        currentScoreTextView.setText(String.valueOf(GameTracker.getCurrentScore()));
+        highScoreTextView.setText(String.valueOf(GameTracker.getHighScore()));
 
         btnRetry.setOnClickListener(onClick);
         btnMenu.setOnClickListener(onClick);

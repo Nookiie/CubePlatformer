@@ -132,7 +132,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
         GameTracker.scores.add(score);
 
         Intent intent = new Intent(getContext(), GameOverActivity.class);
-        intent.putExtra("score", score);
         getContext().startActivity(intent);
     }
     //Run Ends!

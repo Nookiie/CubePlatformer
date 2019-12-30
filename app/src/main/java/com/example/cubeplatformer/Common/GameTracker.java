@@ -30,7 +30,7 @@ public class GameTracker {
     private static boolean godMode = false; // Functional, use for debug purposes
     private static boolean spikesDisabled = false;
 
-    public static Collection<Integer> scores = new ArrayList<>();
+    public static ArrayList<Integer> scores = new ArrayList<>();
 
     public static int getSpeed() {
         return speed;
@@ -122,6 +122,14 @@ public class GameTracker {
         }
 
         return Collections.max(scores);
+    }
+
+    public static int getCurrentScore(){
+        if(scores.isEmpty()){
+            return 0;
+        }
+
+        return scores.get(scores.size() - 1);
     }
 
 }
