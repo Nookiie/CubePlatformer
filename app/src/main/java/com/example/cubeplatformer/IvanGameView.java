@@ -45,6 +45,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     SurfaceHolder surfaceHolder;
     Canvas canvas;
     Thread gameThread;
+    boolean queuedJump=false;
 
     int sizeX;
     int sizeY;
@@ -64,12 +65,12 @@ public class IvanGameView extends SurfaceView implements Runnable{
         //spikes.add(new Spikes(sizeX, sizeY,getContext(),745));
         //spikes.add(new Spikes(sizeX, sizeY,getContext(),700));
 
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 805, 270));
+        platforms.add(new Platform(sizeX, sizeY, getContext(), 845, 270));
         platforms.add(new Platform(sizeX, sizeY, getContext(), 700, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1045, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1000, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1405, 270));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1300, 315));
+        platforms.add(new Platform(sizeX, sizeY, getContext(), 1145, 315));
+        platforms.add(new Platform(sizeX, sizeY, getContext(), 1100, 315));
+        platforms.add(new Platform(sizeX, sizeY, getContext(), 1545, 270));
+        platforms.add(new Platform(sizeX, sizeY, getContext(), 1400, 315));
 
 
         playercube = new PlayerCube(sizeX, sizeY,context);
@@ -153,17 +154,16 @@ public class IvanGameView extends SurfaceView implements Runnable{
             paint.setColor(Color.WHITE);
             paint.setTextSize(50);
 
-            for(Star star : stars){
-                canvas.drawPoint(star.x, star.y, paint);
-            }
 
-            //  canvas.drawRect(playercube.detectCollision,paint);      //Playercube collision figure!
+
             canvas.drawBitmap(
                     playercube.bitmap,
                     playercube.x,
                     playercube.y,
                     paint
             );
+            //  canvas.drawRect(playercube.detectCollision,paint);      //Playercube collision figure!
+
             for(Spikes spike : spikes){
                 canvas.drawBitmap(spike.bitmap,
                         spike.x,
@@ -183,10 +183,10 @@ public class IvanGameView extends SurfaceView implements Runnable{
                         paint);
 
 
-                //canvas.drawRect(platform.detectCollision, paint);       //Paints the collision area... AKA all of it!
-                canvas.drawRect(platform.detectVert, paint);
-                canvas.drawRect(platform.detectBot, paint);
-               // canvas.drawRect(platform.detectTop, paint);
+                // canvas.drawRect(platform.detectCollision, paint);       //Paints the collision area... AKA all of it!
+                // canvas.drawRect(platform.detectVert, paint);
+                // canvas.drawRect(platform.detectBot, paint);
+                // canvas.drawRect(platform.detectTop, paint);
 
             }
 
@@ -228,8 +228,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
                 if(attachcount>0){
                     itsAttachedAlready=true;
-                    previoulyAttached=true;
-
                 }
                 if(attachcount==0){
                     itsAttachedAlready=false;
@@ -239,120 +237,104 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
             if(itsAttachedAlready==false){
                 fall=true;
-              //  playercube.defaultrot();
 
             }
             if(itsAttachedAlready){
                 attachAny=true;
                 playercube.defaultrot();
-                //playercube.RotationChoose(1);
                 fall=false;
             }
-            if(
-                   disabledTouch==true&& Rect.intersects(platform.detectTop,playercube.detectCollision)&&
+
+            if(disabledTouch==true&& Rect.intersects(platform.detectTop,playercube.detectCollision)&&
                            !Rect.intersects(platform.detectVert,playercube.detectCollision)
-            ) {
+            )
+            {
                 if(jumpBool&&playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()+1){
+                    detected=true;      //This might actually never proc
                     alive=false;
-                    //detected=true;
-
                 }
-               // detected=true;
-                platform.multiAttach=true;
-             //   playercube.defaultrot();
+                if(jumpBool==false) {       //if colliding and not going up, attach! Very important
+                    platform.multiAttach = true;
 
-                attachAny=true;
-                playercube.defaultrot();
+                    detected = true;
+                    attachAny = true;
+                    playercube.defaultrot();
 
-                fall=false;
+                    fall = false;
 
-
-               playercube.y=platform.y-playercube.bitmap.getHeight();
-               playercube.startY=playercube.y;
+                    playercube.y = platform.y - playercube.bitmap.getHeight();
+                    playercube.startY = playercube.y;
+                }
             }
 
-            if (Rect.intersects(platform.detectCollision, playercube.detectCollision)) {
-
-                if(Rect.intersects(platform.detectVert,playercube.detectCollision)&&jumpBool==true&&previoulyAttached==false){
-                    detected=true;
-                    alive=false;
+            if (Rect.intersects(platform.detectCollision, playercube.detectCollision))
+            {
+                if(Rect.intersects(platform.detectBot,playercube.detectCollision))
+                {                                                           //Extra insurance for bottom
+                    alive = false;
+                    return;
                 }
-
-
 
                 if (fall == true && playercube.y+playercube.bitmap.getHeight() >= platform.y) {
                                                 //If hitting platform roof while falling, attach!
                     fall=false;
-                   // playercube.rotationIndex=playercube.rotations.length;     //index >3, ++1 => index=0
-                    //playercube.Rotation();
-                   // playercube.defaultrot();
-///ggg
                     playercube.y = platform.y-playercube.bitmap.getHeight();//-GameTracker.getJumpHeight();
                     attachAny = true;
 
                     platform.multiAttach=true;
                     playercube.defaultrot();
+                    playercube.y=platform.y-playercube.bitmap.getHeight();
 
                     platform.platformAttach = true;
-
-                    //attachcount++;
                 }
-                //if(fall==false&&platform.platformAttach==false){
-               //     alive=false;
-               // }
-
-                 if(Rect.intersects(platform.detectBot,playercube.detectCollision)) {     //Extra insurance.
-
-                    alive = false;
-                }
-
             }
 
-            if(
-                    platform.platformAttach==true &&
-                    playercube.x > platform.x + platform.bitmap.getWidth()
-            ) {
+            if(platform.platformAttach==true &&
+                    playercube.x > platform.x + platform.bitmap.getWidth())
+            {
                 platform.platformAttach=false;
                 platform.multiAttach=false;
 
             }
-            if(platform.multiAttach==true&&playercube.x>platform.x+platform.bitmap.getWidth()){
+            if(platform.multiAttach==true&&playercube.x>platform.x+platform.bitmap.getWidth())
+            {
                 platform.multiAttach=false;
             }
 
             playercube.updatecollisions();
             if(Rect.intersects(platform.detectVert,playercube.detectCollision)&&itsAttachedAlready==false){
-                //Left Side minus Jump Height should NEVER intersect!
+                //Left Side of platform minus Jump Height shouldn't intersect!
 
-                if((fall==false&&disabledTouch==true)||(playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed())){//fall==true&&playercube.y+playercube.bitmap.getHeight()>platform.y+30)) {
+                if((fall==false&&disabledTouch==true)||
+                        (playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()))
+                {
                     alive = false;
                     return;
                 }
             }
-            if(alive&&Rect.intersects(platform.detectTop,playercube.detectCollision)){
-
-            }
-
         }//FOR LOOP ENDS!
+
         if(itsAttachedAlready==false){
-            attachAny=false;
             fall=true;
         }
-        // For loop ends!
 
-        if (jumpBool) {                     //On Touch => remove states & go up!
+        if(playercube.y == playercube.startY&&queuedJump==true&&attachAny){        //Jump Queue logic
+            playercube.jumpYmax=playercube.y - GameTracker.getMaxJump();
+            jumpBool=true;
+            queuedJump=false;
+        }
+        if (jumpBool==true) { //On Touch => remove states & go up!
             playercube.Rotation();
             attachAny = false;
             fall = false;
 
             if(playercube.y <= playercube.jumpYmax+20){      //On reaching maximum jump height => Fall!
                 delayfall++;
-                if(delayfall>3) {
+                if(delayfall>3) {               //Delay fall at top for smoother motion
                     jumpBool = false;
                     fall = true;
                     delayfall=0;
                 }
-
             }
             else{
                 playercube.update(GameTracker.getJumpHeight());
@@ -362,28 +344,16 @@ public class IvanGameView extends SurfaceView implements Runnable{
         if(fall==true){                     //Fall!
             playercube.update((-GameTracker.getJumpHeight()));
             playercube.Rotation();
+
         }
 
         if((playercube.y + playercube.bitmap.getHeight())>=floor&&fall==true){    //Attach to floor!
-
 
             attachAny=true;
             fall=false;
             playercube.rotationIndex=playercube.rotations.length;     //index >3, ++1 => index=0
             playercube.Rotation();
             playercube.y=floor-playercube.bitmap.getHeight();
-            playercube.startY=playercube.y;
-
-
-        }
-
-        if(attachAny==true){                //Attach and rotate to 90 degrees!
-
-            fall=false;
-           // playercube.rotationIndex=playercube.rotations.length;     //index >3, ++1 => index=0
-           // playercube.Rotation();
-            playercube.defaultrot();
-
             playercube.startY=playercube.y;
         }
     }
@@ -402,8 +372,13 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(fall==true) {
+            queuedJump = true;        //Queues up the jump only when falling
+        }
+
         if (playercube.y == playercube.startY){           // Disable event while in jump animation!
             disabledTouch = false;                        // When attaching to PLATFORM, startY needs to change as well!
+
         }
         if(disabledTouch == false){
 

@@ -30,6 +30,8 @@ public class PlayerCube extends BaseEntity {
 
     public int[] rotations = {
             R.drawable.cube2,
+            R.drawable.cube2,
+            R.drawable.cube2,
             R.drawable.cube2rot225,
             R.drawable.cube2rot225,
             R.drawable.cube2rot225,
@@ -121,6 +123,8 @@ public class PlayerCube extends BaseEntity {
         Bitmap bi = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube2);
         bitmap=bi;
+        detectCollision.top=y;
+        detectCollision.bottom=y+bitmap.getHeight();
         return bitmap;
     }
 
