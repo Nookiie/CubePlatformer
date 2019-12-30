@@ -8,4 +8,4 @@
 ---
 Логика за скачане, сблъскване и ротация: Иван (Gorac11)
 ---
-Създаване на LevelBuilder за procedural generation на обектите: Виктор (Nookiie)
+Създаване на LevelBuilder за Procedural Generation на обектите: Виктор (Nookiie)
