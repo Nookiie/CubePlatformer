@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -18,13 +17,10 @@ import com.example.cubeplatformer.Entities.Platform;
 import com.example.cubeplatformer.Entities.PlatformModule;
 import com.example.cubeplatformer.Entities.PlayerCube;
 import com.example.cubeplatformer.Entities.Spikes;
-import com.example.cubeplatformer.Entities.Star;
 
 import java.util.ArrayList;
 
 public class IvanGameView extends SurfaceView implements Runnable{
-
-    boolean detected=false;
 
     boolean alive;
     int timer;
@@ -40,7 +36,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
     boolean fall=false;
     int floor;
 
-    ArrayList<Star> stars = new ArrayList<>();
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -54,7 +49,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
     int sizeX;
     int sizeY;
     boolean jumpBool = false;
-    public boolean previoulyAttached = false;
 
     int stop=270;
 
@@ -66,25 +60,9 @@ public class IvanGameView extends SurfaceView implements Runnable{
         this.sizeY = sizeY;
         floor=sizeY-120;
 
-        //spikes.add(new Spikes(sizeX, sizeY,getContext(),745));
-        //spikes.add(new Spikes(sizeX, sizeY,getContext(),700));
-/*
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 845, 270));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 700, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1145, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1100, 315));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1545, 270));
-        platforms.add(new Platform(sizeX, sizeY, getContext(), 1400, 315));
-*/
-
         playercube = new PlayerCube(sizeX, sizeY,context);
         surfaceHolder = getHolder();
         paint = new Paint();
-
-
-        for(int i = 0 ; i < 98; i++){
-            stars.add(new Star(sizeX, sizeY));
-        }
 
         gameThread = new Thread(this);
         gameThread.start();
@@ -96,13 +74,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
             frameRate();
             update();
             draw();
-
-            // For spikes!
-            /*
-            if(timer % 150 == 0) {
-                spikes.add(new Spikes(sizeX, sizeY, getContext(),900));
-            }
-           */
 
             // Module Spawn
             if(timer % GameTracker.getModuleRate() == 0||firstModule){
@@ -120,14 +91,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
                     spikes.add(spike);
                 }
             }
-/*
-                                //Makes first 2 platforms are really close to show multi-level jump!
-            if(timer % 100 == 0) {
-                platforms.add(new Platform(sizeX, sizeY, getContext(), 700, sizeY-180));
-            }
-            if(timer % 122 == 0) {
-                platforms.add(new Platform(sizeX, sizeY, getContext(), 700,playercube.y-60));
-            }*/
+
         }
         //Game Over State
         GameTracker.scores.add(score);
@@ -144,25 +108,11 @@ public class IvanGameView extends SurfaceView implements Runnable{
         if(surfaceHolder.getSurface().isValid()){
             canvas = surfaceHolder.lockCanvas();
 
-            canvas.drawText("Already: " + itsAttachedAlready,// attachcount,//GameTracker.getScore(),
-                    canvas.getWidth() / 2 ,
-                    80,
-                    paint);
-            canvas.drawText("count: " + attachcount,// attachcount,//GameTracker.getScore(),
-                    canvas.getWidth() / 2 ,
-                    110,
-                    paint);
-            canvas.drawText("fall: " + fall,// attachcount,//GameTracker.getScore(),
-                    canvas.getWidth() / 2 ,
-                    140,
-                    paint);
-            canvas.drawText("det: " + detected,// attachcount,//GameTracker.getScore(),
-                    canvas.getWidth() / 2 ,
-                    170,
-                    paint);
-            canvas.drawText("score: " + score,// attachcount,//GameTracker.getScore(),
-                    canvas.getWidth() / 2 ,
-                    200,
+
+
+            canvas.drawText("score: " + score,
+                    canvas.getWidth() / 2-40 ,
+                    50,
                     paint);
 
             canvas.drawColor(Color.argb(200,131,159,255));
@@ -183,11 +133,8 @@ public class IvanGameView extends SurfaceView implements Runnable{
                         spike.x,
                         spike.y,
                         paint);
-                /*
-                canvas.drawRect(spike.detectHor,paint);         //Paint collision areas in white!
-                canvas.drawRect(spike.detectVert,paint);
-                */
-
+                //canvas.drawRect(spike.detectHor,paint);         //Paint collision areas in white!
+                //canvas.drawRect(spike.detectVert,paint);
             }
 
             for(Platform platform : platforms) {
@@ -195,17 +142,13 @@ public class IvanGameView extends SurfaceView implements Runnable{
                         platform.x,
                         platform.y,
                         paint);
-
-
                 // canvas.drawRect(platform.detectCollision, paint);       //Paints the collision area... AKA all of it!
                 // canvas.drawRect(platform.detectVert, paint);
                 // canvas.drawRect(platform.detectBot, paint);
                 // canvas.drawRect(platform.detectTop, paint);
 
             }
-
             surfaceHolder.unlockCanvasAndPost(canvas);
-
         }
     }
 
@@ -273,7 +216,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
             {
                 if(jumpBool&&playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()+1
                         &&playercube.y>platform.y-15){
-                    detected=true;
                     alive=false;
                 }
                 if(jumpBool==false) {       //if colliding and not going up, attach! Very important
@@ -373,7 +315,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
             attachAny=true;
             fall=false;
-            playercube.rotationIndex=playercube.rotations.length;     //index >3, ++1 => index=0
+            playercube.rotationIndex=playercube.rotations.length;
             playercube.Rotation();
             playercube.y=floor-playercube.bitmap.getHeight();
             playercube.startY=playercube.y;
@@ -393,10 +335,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     private void frameRate() {
         try{
-            //     gameThread.sleep(100 / GameTracker.getSpeed());
-
-            gameThread.sleep(6);           //<- What I used... Haven't tested ^^^^
-
+            gameThread.sleep(6);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -413,7 +352,6 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
         }
         if(disabledTouch == false){
-
             playercube.jumpYmax=playercube.y - GameTracker.getMaxJump();         //Update max jump height!
             jumpBool = true;
 

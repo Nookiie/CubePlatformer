@@ -51,8 +51,7 @@ public class PlayerCube extends BaseEntity {
         this.context = context;
 
         x = 300;
-        y = sizeY - bitmap.getHeight() - 120;   //To see how the matrix bugs out
-                                                //Should be ~120
+        y = sizeY - bitmap.getHeight() - 120;
 
         jumpYmax=y-120;
         startY=y;
@@ -65,16 +64,11 @@ public class PlayerCube extends BaseEntity {
 
     @Override
     public void draw(Canvas canvas) {
-
     }
 
    // @Override
    public void update(int jump) {
-
-       ////////////////////////////////////////////////////////////////////////////////////   bitmap=Rotation();
-       y -= jump;             //This works for jumping
-       //   bitmap=RotateBitmap(bitmap,45);     //pass the angle you want to rotate
-
+       y -= jump;
        detectCollision.top=y;
        detectCollision.bottom=y+bitmap.getHeight();
 
@@ -82,17 +76,7 @@ public class PlayerCube extends BaseEntity {
         detectCollision.top=y;
         detectCollision.bottom=y+bitmap.getHeight();
     }
-    public static Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        Bitmap bi=Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-       // Bitmap bi=Bitmap.createBitmap(source, 0, 0, source.getWidth()/2, source.getHeight()/2, matrix, true);
-            //THIS IS THE PROBLEMS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            //TRY THE SECOND TO DECREASE THE SIZE AND BUG OUT AGAIN... AT LEAST IT DOESN'T MOVE!
-        return bi;
 
-    }
     public void Rotation(){
 
         rotationIndex++;
@@ -104,20 +88,6 @@ public class PlayerCube extends BaseEntity {
         bitmap=bi;
         detectCollision.top=y;
         detectCollision.bottom=y+bitmap.getHeight();
-    }public void RotationChoose(int i){
-
-        if(i>0) {
-            rotationIndex=0;
-
-            Bitmap bi = BitmapFactory.decodeResource(context.getResources(), rotations[rotationIndex]);
-
-            bitmap = bi;
-            detectCollision.top = y;
-            detectCollision.bottom = y + bitmap.getHeight();
-            i--;
-        }
-
-
     }
     public Bitmap defaultrot(){
         Bitmap bi = BitmapFactory.decodeResource(context.getResources(),
