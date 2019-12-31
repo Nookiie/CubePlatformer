@@ -41,6 +41,7 @@ public class GameOverActivity extends AppCompatActivity {
                     intent.putExtra("retry", false);
 
                     startActivity(intent);
+                    finish();
                     break;
 
                 case R.id.retryBtn:
@@ -48,6 +49,7 @@ public class GameOverActivity extends AppCompatActivity {
                     retryIntent.putExtra("retry", true);
 
                     startActivity(retryIntent);
+                    finish();
                     break;
             }
         }

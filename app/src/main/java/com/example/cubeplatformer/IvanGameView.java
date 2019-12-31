@@ -1,5 +1,6 @@
 package com.example.cubeplatformer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -133,8 +134,11 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         getContext().startActivity(intent);
+        ((Activity) getContext()).finish();
+
     }
     //Run Ends!
+
 
     public void draw(){
         if(surfaceHolder.getSurface().isValid()){
