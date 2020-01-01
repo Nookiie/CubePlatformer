@@ -16,7 +16,7 @@ public class ModuleBuilder {
     private static Random RNGModulePicker = new Random();
     public static final ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
     public static int canvas = 855;
-    static int oneSpace = 45;
+    static int oneSpace = 60;
     public static int randomNumber;
     static int previousNumber = 999;
 
@@ -48,6 +48,7 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(11), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
+
         cleanUpBuildersAndSave("module1", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
@@ -268,10 +269,10 @@ public class ModuleBuilder {
     }
 
     public static int place(int num) {
-        return (canvas + (num * 45));
+        return (canvas + (num * oneSpace));
     }
 
     public static int level(int num) {
-        return 315 - (num * 45);
+        return 315 - (num * oneSpace);
     }
 }
