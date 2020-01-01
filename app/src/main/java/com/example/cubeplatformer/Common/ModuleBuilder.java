@@ -7,6 +7,7 @@ import com.example.cubeplatformer.Entities.Platform;
 import com.example.cubeplatformer.Entities.PlatformModule;
 import com.example.cubeplatformer.Entities.PlayerCube;
 import com.example.cubeplatformer.Entities.Spikes;
+import com.example.cubeplatformer.IvanGameView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ import java.util.Random;
 public class ModuleBuilder {
     private static Random RNGModulePicker = new Random();
     public static final ArrayList<PlatformModule> modules = new ArrayList<PlatformModule>();
-    public static int canvas = 855;
-    static int oneSpace = 60;
+    //public static int canvas = 855;
+    static int oneSpace = IvanGameView.elementSize;//IvanGameView.elementSize;   ///////////////////////////////////////////////////////////////////////////////////////////////////////
     public static int randomNumber;
     static int previousNumber = 999;
 
@@ -269,10 +270,10 @@ public class ModuleBuilder {
     }
 
     public static int place(int num) {
-        return (canvas + (num * oneSpace));
+        return (900 + (num * oneSpace));
     }
 
     public static int level(int num) {
-        return 315 - (num * oneSpace);
+        return IvanGameView.floorbetter-IvanGameView.elementSize -(num * oneSpace);
     }
 }

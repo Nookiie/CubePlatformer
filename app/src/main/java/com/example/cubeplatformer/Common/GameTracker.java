@@ -2,6 +2,8 @@ package com.example.cubeplatformer.Common;
 
 import android.graphics.Point;
 
+import com.example.cubeplatformer.IvanGameView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,13 +16,13 @@ public class GameTracker {
 
     private static final int DEFAULT_SPEED = 6;
     private static final int DEFAULT_JUMP_HEIGHT = 10;      // EVERY FRAME JUMP INCREASES BY THIS!
-    private static final int DEFAULT_MAX_JUMP = 150;
+    private static final int DEFAULT_MAX_JUMP = IvanGameView.elementSize*3+IvanGameView.elementSize/3;
     private static final int DEFAULT_SCORE = 2;
     private static final int DEFAULT_SCORE_RATE = 15;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
     private static final int DEFAULT_MODULE_RATE = 185;
-    private static final Point DEFAULT_VIEW_SIZE = new Point(720, 480);
-    private static final Point DEFAULT_SCREEN_SIZE = new Point(900, 360);
+  //  private static final Point DEFAULT_VIEW_SIZE = new Point(720, 480);
+    private static final Point DEFAULT_SCREEN_SIZE = new Point(IvanGameView.xx, IvanGameView.yy);
 
     private static int jumpHeight = DEFAULT_JUMP_HEIGHT;
     private static int maxJump = DEFAULT_MAX_JUMP;
@@ -29,7 +31,7 @@ public class GameTracker {
     private static int scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
     private static int scoreRate = DEFAULT_SCORE_RATE;
     private static int moduleRate = DEFAULT_MODULE_RATE;
-    private static Point viewSize = DEFAULT_VIEW_SIZE;
+   // private static Point viewSize = DEFAULT_VIEW_SIZE;
     private static Point screenSize = DEFAULT_SCREEN_SIZE;
 
 
@@ -115,17 +117,21 @@ public class GameTracker {
         return maxJump;
     }
 
+    public static void setMaxJump(int maxJump) {
+        GameTracker.maxJump = maxJump;
+    }
+
     public static void setJumpHeight(int jumpHeight) {
         GameTracker.jumpHeight = jumpHeight;
     }
 
-    public static Point getViewSize() {
-        return viewSize;
-    }
+  //  public static Point getViewSize() {
+  //      return viewSize;
+  //  }
 
-    public static void setViewSize(Point viewSize) {
-        GameTracker.viewSize = viewSize;
-    }
+  //  public static void setViewSize(Point viewSize) {
+  //      GameTracker.viewSize = viewSize;
+  //  }
 
     public static Point getScreenSize() {
         return screenSize;

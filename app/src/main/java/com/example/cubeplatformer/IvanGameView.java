@@ -3,6 +3,7 @@ package com.example.cubeplatformer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
 
     boolean alive;
     int timer;
+    int othertimer;
     int score = GameTracker.getScore();
     int delayfall = 0;
     int attachcount = 0;
@@ -36,15 +38,27 @@ public class IvanGameView extends SurfaceView implements Runnable {
     boolean fall = false;
     int floor;
 
+    public static int xx;
+    public static int yy;
+    public static int floorbetter;
+    public static int elementSize;//Platform.size;
+
+
+
+
+
+
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
+
 
     Paint paint;
     SurfaceHolder surfaceHolder;
     Canvas canvas;
     Thread gameThread;
     boolean queuedJump = false;
+
 
     int sizeX;
     int sizeY;
@@ -58,10 +72,13 @@ public class IvanGameView extends SurfaceView implements Runnable {
         alive = true;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        floor = sizeY - 120;
+        //floor = sizeY - 120;
 
         playercube = new PlayerCube(sizeX, sizeY, context);
+        elementSize=playercube.bitmap.getWidth();
+        GameTracker.setMaxJump(elementSize*3+elementSize/3);
         surfaceHolder = getHolder();
+
         paint = new Paint();
 
         gameThread = new Thread(this);
@@ -76,7 +93,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
             draw();
 
             // Module Spawn
-            if (timer % GameTracker.getModuleRate() == 0 || firstModule) {
+            if (timer % GameTracker.getModuleRate() == 0 || (firstModule&&othertimer>0)) {
                 firstModule = false;
                 // Initializing the Module Builder
                 ModuleBuilder.modulesMap(getContext(), sizeX, sizeY, playercube);
@@ -109,9 +126,29 @@ public class IvanGameView extends SurfaceView implements Runnable {
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
-            canvas.drawText("score: " + score,
+            floor=canvas.getHeight();
+            //elementSize=platforms.get(0).bitmap.getWidth();
+            xx=canvas.getWidth();
+            yy=canvas.getHeight();
+            floorbetter=floor;
+            othertimer=1;
+
+
+           /* canvas.drawText("score: " + score,
                     canvas.getWidth() / 2 - 40,
                     50,
+                    paint);*/
+            canvas.drawText("XX: " + canvas.getWidth(),
+                    canvas.getWidth() / 2 - 40,
+                    50,
+                    paint);
+            canvas.drawText("size: " + elementSize,
+                    canvas.getWidth() / 2 - 40,
+                    120,
+                    paint);
+            canvas.drawText("maxJump: " + GameTracker.getMaxJump(),
+                    canvas.getWidth() / 2 - 40,
+                    190,
                     paint);
 
             canvas.drawColor(Color.argb(200, 131, 159, 255));

@@ -22,6 +22,7 @@ public class Platform extends BaseEntity {
     // int finalX=-10;         //When to delete! UNUSED!!!
     public boolean flag = true;
     public boolean isAlive = true;
+    public static int size=R.drawable.platform2;
 
     public boolean platformAttach = false;
     public boolean multiAttach = false;
@@ -47,6 +48,7 @@ public class Platform extends BaseEntity {
 
         bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.platform2);
+        size=bitmap.getWidth();
         x = startX;
         //startY = sizeY - bitmap.getHeight() - 120;
         y = startY;
