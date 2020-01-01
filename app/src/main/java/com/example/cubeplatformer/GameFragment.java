@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.cubeplatformer.Common.GameTracker;
+
 
 public class GameFragment extends Fragment {
 
@@ -28,7 +30,8 @@ public class GameFragment extends Fragment {
         Point size = new Point();
         display.getSize(size);
 
-        IvanGameView ivanGameView = new IvanGameView(getActivity(), size.x, size.y);
+        IvanGameView ivanGameView = new IvanGameView(getActivity(), GameTracker.getViewSize().x, GameTracker.getViewSize().y);
+        ivanGameView.surfaceHolder.setFixedSize(GameTracker.getScreenSize().x, GameTracker.getScreenSize().y);
 
         playMusic();
         return ivanGameView;

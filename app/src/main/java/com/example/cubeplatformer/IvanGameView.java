@@ -109,7 +109,6 @@ public class IvanGameView extends SurfaceView implements Runnable {
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
-
             canvas.drawText("score: " + score,
                     canvas.getWidth() / 2 - 40,
                     50,
