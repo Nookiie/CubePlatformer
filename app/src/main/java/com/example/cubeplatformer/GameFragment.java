@@ -1,9 +1,7 @@
 package com.example.cubeplatformer;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
-import android.net.Uri;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +13,7 @@ import android.view.ViewGroup;
 
 
 public class GameFragment extends Fragment {
-
+    private static MediaPlayer mediaPlayer;
     public GameFragment() { }
 
     @Override
@@ -29,6 +27,19 @@ public class GameFragment extends Fragment {
 
         IvanGameView ivanGameView = new IvanGameView(getActivity(), size.x, size.y);
 
+        playMusic();
         return ivanGameView;
+    }
+    public void playMusic()
+    {
+        mediaPlayer= MediaPlayer.create(getActivity(),R.raw.lv1);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
+
+    }
+    public static void stopMusic()
+    {
+        mediaPlayer.stop();
     }
 }

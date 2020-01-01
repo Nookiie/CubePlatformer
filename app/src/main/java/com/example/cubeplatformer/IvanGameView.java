@@ -20,6 +20,8 @@ import com.example.cubeplatformer.Entities.Spikes;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.FragmentActivity;
+
 public class IvanGameView extends SurfaceView implements Runnable{
 
     boolean alive;
@@ -96,6 +98,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
         //Game Over State
         GameTracker.scores.add(score);
 
+        GameFragment.stopMusic();
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         getContext().startActivity(intent);
         ((Activity) getContext()).finish();

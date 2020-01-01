@@ -41,6 +41,7 @@ public class GameOverActivity extends AppCompatActivity {
                     intent.putExtra("retry", false);
 
                     startActivity(intent);
+
                     finish();
                     break;
 
