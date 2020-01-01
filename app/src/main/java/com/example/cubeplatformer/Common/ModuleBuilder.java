@@ -31,11 +31,11 @@ public class ModuleBuilder {
         ArrayList<Platform> platformBuilder = new ArrayList<Platform>();
         ArrayList<Spikes> spikesBuilder = new ArrayList<Spikes>();
 
-
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(4), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(8), level(1)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(12), level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context, place(12), level(4)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(1), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(2), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(3), level(0)));
@@ -48,7 +48,7 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(11), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
-        cleanUpBuildersAndSave("moduleA", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module1", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(4), level(1)));
@@ -67,7 +67,7 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14), level(0)));
-        cleanUpBuildersAndSave("moduleB", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module2", platformBuilder, spikesBuilder);
 
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
@@ -88,7 +88,7 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14), level(0)));
-        cleanUpBuildersAndSave("moduleB2", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module3", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(9), level(1)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(11), level(1)));
@@ -103,8 +103,8 @@ public class ModuleBuilder {
 
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(11), level(2)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(2)));
-        cleanUpBuildersAndSave("moduleC", platformBuilder, spikesBuilder);
 
+        cleanUpBuildersAndSave("module4", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(3), level(2)));
@@ -137,30 +137,30 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(11), level(6)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(6)));
 
-        cleanUpBuildersAndSave("moduleD", platformBuilder, spikesBuilder);
-
-        //up down up down up down
+        cleanUpBuildersAndSave("module5", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(3), level(2)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(5), level(0)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(6), level(0)));
+        //platformBuilder.add(new Platform(sizeX, sizeY, context,place(6),level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(9), level(2)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(11), level(0)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(12), level(0)));
+        //platformBuilder.add(new Platform(sizeX, sizeY, context,place(12),level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(15), level(2)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(1), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(2), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(3), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(4), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(6), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(7), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(8), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(9), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(10), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14), level(0)));
-        cleanUpBuildersAndSave("moduleE", platformBuilder, spikesBuilder);
-
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(15), level(0)));
+        cleanUpBuildersAndSave("module6", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(3), level(2)));
@@ -184,7 +184,7 @@ public class ModuleBuilder {
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(15), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(16), level(0)));
 
-        cleanUpBuildersAndSave("moduleF", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module7", platformBuilder, spikesBuilder);
 
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(0)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(1), level(0)));
@@ -196,34 +196,44 @@ public class ModuleBuilder {
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(11), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(12), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(13), level(4)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context, place(14), level(4)));
 
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(3), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(4), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(5), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(8), level(2)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(12), level(5)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(5)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(13), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(15), level(0)));
 
-        cleanUpBuildersAndSave("moduleE", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module8", platformBuilder, spikesBuilder);
 
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(0), level(2)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(1), level(2)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(2), level(2)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(0), level(0)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context, place(1), level(1)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context, place(2), level(1)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(3), level(2)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(7), level(4)));
+        platformBuilder.add(new Platform(sizeX, sizeY, context, place(4), level(2)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(8), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(9), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(10), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(11), level(4)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(11), level(6)));
         platformBuilder.add(new Platform(sizeX, sizeY, context, place(12), level(6)));
-        platformBuilder.add(new Platform(sizeX, sizeY, context, place(13), level(6)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(1), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(2), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(3), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(4), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(5), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(6), level(0)));
+        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(7), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(14), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(15), level(0)));
         spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(16), level(0)));
-        spikesBuilder.add(new Spikes(sizeX, sizeY, context, place(17), level(0)));
 
-        cleanUpBuildersAndSave("moduleF", platformBuilder, spikesBuilder);
+        cleanUpBuildersAndSave("module9", platformBuilder, spikesBuilder);
+
     }
 
     // Random Module Picker
