@@ -242,7 +242,9 @@ public class IvanGameView extends SurfaceView implements Runnable {
             }
             if (itsAttachedAlready) {
                 attachAny = true;
-                playercube.defaultrot();
+               if(playercube.rotationIndex>2) {
+                   playercube.defaultrot();
+               }
                 fall = false;
             }
 
