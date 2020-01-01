@@ -35,7 +35,7 @@ public class GameOverActivity extends AppCompatActivity {
     View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.menuBtn:
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("retry", false);

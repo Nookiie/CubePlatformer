@@ -40,11 +40,11 @@ public class GameTracker {
         GameTracker.speed = speed;
     }
 
-    public void resetScore(){
+    public void resetScore() {
         score = DEFAULT_SCORE;
     }
 
-    public void resetScoreMultiplier(){
+    public void resetScoreMultiplier() {
         scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
     }
 
@@ -72,7 +72,7 @@ public class GameTracker {
         GameTracker.scoreRate = scoreRate;
     }
 
-    public static void  updateScore(){
+    public static void updateScore() {
         score += scoreRate * scoreMultiplier;
     }
 
@@ -112,20 +112,24 @@ public class GameTracker {
         GameTracker.jumpHeight = jumpHeight;
     }
 
-    public static int getModuleRate() {  return moduleRate; }
+    public static int getModuleRate() {
+        return moduleRate;
+    }
 
-    public static void setModuleRate(int moduleRate) { GameTracker.moduleRate = moduleRate; }
+    public static void setModuleRate(int moduleRate) {
+        GameTracker.moduleRate = moduleRate;
+    }
 
-    public static int getHighScore(){
-        if(scores.isEmpty()){
+    public static int getHighScore() {
+        if (scores.isEmpty()) {
             return 0;
         }
 
         return Collections.max(scores);
     }
 
-    public static int getCurrentScore(){
-        if(scores.isEmpty()){
+    public static int getCurrentScore() {
+        if (scores.isEmpty()) {
             return 0;
         }
 

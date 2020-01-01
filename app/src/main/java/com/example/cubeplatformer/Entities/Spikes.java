@@ -17,11 +17,11 @@ public class Spikes extends BaseEntity {
     public int x;
     public int y;
     //int startX=300;     //Take From external class LevelBuilder OR something.
-    int finalX=-10;
-    public boolean isAlive=true;
+    int finalX = -10;
+    public boolean isAlive = true;
 
-   // int maxX;
-   // int maxY;
+    // int maxX;
+    // int maxY;
 
     int speed = GameTracker.getSpeed();
 
@@ -30,13 +30,13 @@ public class Spikes extends BaseEntity {
     public Rect detectHor;
 
 
-    public Spikes(int sizeX, int sizeY, Context context, int startX,int startY){//, Bitmap bitmap, Rect cube, Paint paint) {
-        super(sizeX, sizeY,context);//, bitmap, cube, paint);
+    public Spikes(int sizeX, int sizeY, Context context, int startX, int startY) {//, Bitmap bitmap, Rect cube, Paint paint) {
+        super(sizeX, sizeY, context);//, bitmap, cube, paint);
 
         this.context = context;
 
-    //    maxX = sizeX;
-    //    maxY = sizeY;
+        //    maxX = sizeX;
+        //    maxY = sizeY;
 
         bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.spike2);
@@ -45,16 +45,16 @@ public class Spikes extends BaseEntity {
         y = startY;
 
 
-        detectHor=new Rect(x,
-                y+bitmap.getHeight()-1,
-                x+bitmap.getWidth(),
-                y+bitmap.getHeight()
+        detectHor = new Rect(x,
+                y + bitmap.getHeight() - 1,
+                x + bitmap.getWidth(),
+                y + bitmap.getHeight()
         );
 
-        detectVert=new Rect(x+(bitmap.getWidth()/2),
-                y+6,
-                x+(bitmap.getWidth()/2),
-                y+bitmap.getHeight()
+        detectVert = new Rect(x + (bitmap.getWidth() / 2),
+                y + 6,
+                x + (bitmap.getWidth() / 2),
+                y + bitmap.getHeight()
         );
 
     }
@@ -64,20 +64,20 @@ public class Spikes extends BaseEntity {
 
     }
 
-   // @Override
+    // @Override
     public void update() {
 
         x -= speed;
 
-        detectHor.left= x+1;
-        detectHor.top= y+bitmap.getHeight()-1;
-        detectHor.right= x+bitmap.getWidth();
-        detectHor.bottom= y+bitmap.getHeight();
+        detectHor.left = x + 1;
+        detectHor.top = y + bitmap.getHeight() - 1;
+        detectHor.right = x + bitmap.getWidth();
+        detectHor.bottom = y + bitmap.getHeight();
 
-        detectVert.left= x+(bitmap.getWidth()/2);
-        detectVert.top= y+15;
-        detectVert.right= x+(bitmap.getWidth()/2);
-        detectVert.bottom= y+bitmap.getHeight();
+        detectVert.left = x + (bitmap.getWidth() / 2);
+        detectVert.top = y + 15;
+        detectVert.right = x + (bitmap.getWidth() / 2);
+        detectVert.bottom = y + bitmap.getHeight();
 
     }
 

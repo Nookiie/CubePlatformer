@@ -44,17 +44,17 @@ public class PlayerCube extends BaseEntity {
     };
 
 
-    public PlayerCube(int sizeX, int sizeY,Context context){//, Rect cube, Paint paint) {
-        super(sizeX,sizeY,context);
-        bitmap= BitmapFactory.decodeResource(context.getResources(),
+    public PlayerCube(int sizeX, int sizeY, Context context) {//, Rect cube, Paint paint) {
+        super(sizeX, sizeY, context);
+        bitmap = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube2);
         this.context = context;
 
         x = 300;
         y = sizeY - bitmap.getHeight() - 120;
 
-        jumpYmax=y-120;
-        startY=y;
+        jumpYmax = y - 120;
+        startY = y;
 
         detectCollision = new Rect(x, y,
                 x + bitmap.getWidth(),
@@ -66,40 +66,40 @@ public class PlayerCube extends BaseEntity {
     public void draw(Canvas canvas) {
     }
 
-   // @Override
-   public void update(int jump) {
-       y -= jump;
-       detectCollision.top=y;
-       detectCollision.bottom=y+bitmap.getHeight();
+    // @Override
+    public void update(int jump) {
+        y -= jump;
+        detectCollision.top = y;
+        detectCollision.bottom = y + bitmap.getHeight();
 
-   } public void updatecollisions() {
-        detectCollision.top=y;
-        detectCollision.bottom=y+bitmap.getHeight();
     }
 
-    public void Rotation(){
+    public void updatecollisions() {
+        detectCollision.top = y;
+        detectCollision.bottom = y + bitmap.getHeight();
+    }
+
+    public void Rotation() {
 
         rotationIndex++;
-        if(rotationIndex>rotations.length-1){
-            rotationIndex=0;
+        if (rotationIndex > rotations.length - 1) {
+            rotationIndex = 0;
         }
-        Bitmap bi= BitmapFactory.decodeResource(context.getResources(),rotations[rotationIndex]);
+        Bitmap bi = BitmapFactory.decodeResource(context.getResources(), rotations[rotationIndex]);
 
-        bitmap=bi;
-        detectCollision.top=y;
-        detectCollision.bottom=y+bitmap.getHeight();
+        bitmap = bi;
+        detectCollision.top = y;
+        detectCollision.bottom = y + bitmap.getHeight();
     }
-    public Bitmap defaultrot(){
+
+    public Bitmap defaultrot() {
         Bitmap bi = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube2);
-        bitmap=bi;
-        detectCollision.top=y;
-        detectCollision.bottom=y+bitmap.getHeight();
+        bitmap = bi;
+        detectCollision.top = y;
+        detectCollision.bottom = y + bitmap.getHeight();
         return bitmap;
     }
-
-
-
 
 
 }

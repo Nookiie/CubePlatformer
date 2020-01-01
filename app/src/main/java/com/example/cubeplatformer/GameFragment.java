@@ -16,7 +16,8 @@ import android.view.ViewGroup;
 
 public class GameFragment extends Fragment {
 
-    public GameFragment() { }
+    public GameFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

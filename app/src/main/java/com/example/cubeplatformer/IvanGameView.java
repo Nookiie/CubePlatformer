@@ -20,20 +20,20 @@ import com.example.cubeplatformer.Entities.Spikes;
 
 import java.util.ArrayList;
 
-public class IvanGameView extends SurfaceView implements Runnable{
+public class IvanGameView extends SurfaceView implements Runnable {
 
     boolean alive;
     int timer;
     int score = GameTracker.getScore();
-    int delayfall=0;
-    int attachcount=0;
+    int delayfall = 0;
+    int attachcount = 0;
     PlayerCube playercube;
-    boolean disabledTouch=false;
-    boolean itsAttachedAlready=false;
-    boolean firstModule=true;
+    boolean disabledTouch = false;
+    boolean itsAttachedAlready = false;
+    boolean firstModule = true;
 
-    boolean attachAny=false;
-    boolean fall=false;
+    boolean attachAny = false;
+    boolean fall = false;
     int floor;
 
 
@@ -44,13 +44,13 @@ public class IvanGameView extends SurfaceView implements Runnable{
     SurfaceHolder surfaceHolder;
     Canvas canvas;
     Thread gameThread;
-    boolean queuedJump=false;
+    boolean queuedJump = false;
 
     int sizeX;
     int sizeY;
     boolean jumpBool = false;
 
-    int stop=270;
+    int stop = 270;
 
     public IvanGameView(Context context, int sizeX, int sizeY) {
         super(context);
@@ -58,9 +58,9 @@ public class IvanGameView extends SurfaceView implements Runnable{
         alive = true;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        floor=sizeY-120;
+        floor = sizeY - 120;
 
-        playercube = new PlayerCube(sizeX, sizeY,context);
+        playercube = new PlayerCube(sizeX, sizeY, context);
         surfaceHolder = getHolder();
         paint = new Paint();
 
@@ -70,24 +70,24 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     @Override
     public void run() {
-        while(alive || GameTracker.isGodMode()){
+        while (alive || GameTracker.isGodMode()) {
             frameRate();
             update();
             draw();
 
             // Module Spawn
-            if(timer % GameTracker.getModuleRate() == 0||firstModule){
-                firstModule=false;
+            if (timer % GameTracker.getModuleRate() == 0 || firstModule) {
+                firstModule = false;
                 // Initializing the Module Builder
                 ModuleBuilder.modulesMap(getContext(), sizeX, sizeY, playercube);
 
                 PlatformModule chosenModule = ModuleBuilder.getRandomModule();
 
-                for(Platform platform : chosenModule.platforms){
+                for (Platform platform : chosenModule.platforms) {
                     platforms.add(platform);
                 }
 
-                for(Spikes spike : chosenModule.spikes){
+                for (Spikes spike : chosenModule.spikes) {
                     spikes.add(spike);
                 }
             }
@@ -104,18 +104,17 @@ public class IvanGameView extends SurfaceView implements Runnable{
     //Run Ends!
 
 
-    public void draw(){
-        if(surfaceHolder.getSurface().isValid()){
+    public void draw() {
+        if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
 
-
             canvas.drawText("score: " + score,
-                    canvas.getWidth() / 2-40 ,
+                    canvas.getWidth() / 2 - 40,
                     50,
                     paint);
 
-            canvas.drawColor(Color.argb(200,131,159,255));
+            canvas.drawColor(Color.argb(200, 131, 159, 255));
 
             paint.setColor(Color.WHITE);
             paint.setTextSize(50);
@@ -128,7 +127,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
             );
             //  canvas.drawRect(playercube.detectCollision,paint);      //Playercube collision figure!
 
-            for(Spikes spike : spikes){
+            for (Spikes spike : spikes) {
                 canvas.drawBitmap(spike.bitmap,
                         spike.x,
                         spike.y,
@@ -137,7 +136,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
                 //canvas.drawRect(spike.detectVert,paint);
             }
 
-            for(Platform platform : platforms) {
+            for (Platform platform : platforms) {
                 canvas.drawBitmap(platform.bitmap,
                         platform.x,
                         platform.y,
@@ -156,17 +155,17 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
         timer++;
 
-        if(timer % GameTracker.getScoreRate() == 0){
+        if (timer % GameTracker.getScoreRate() == 0) {
             score++;
         }
 
-        for(Spikes spike:spikes){
+        for (Spikes spike : spikes) {
             spike.update();
-            if(spike.x+spike.bitmap.getWidth()<0){
-                spike.isAlive=false;
+            if (spike.x + spike.bitmap.getWidth() < 0) {
+                spike.isAlive = false;
             }
             if (
-                            Rect.intersects(spike.detectHor, playercube.detectCollision) ||
+                    Rect.intersects(spike.detectHor, playercube.detectCollision) ||
                             Rect.intersects(spike.detectVert, playercube.detectCollision)
             ) {
                 alive = false;
@@ -177,12 +176,12 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
             platform.update();
 
-            if(platform.x+platform.bitmap.getWidth()<0){
-                platform.isAlive=false;
+            if (platform.x + platform.bitmap.getWidth() < 0) {
+                platform.isAlive = false;
             }
-            attachcount=0;
+            attachcount = 0;
 
-            if(timer%2==0) {                                    //Fixes stuttering when calculating
+            if (timer % 2 == 0) {                                    //Fixes stuttering when calculating
 
                 for (int i = 0; i < platforms.size(); i++) {
 
@@ -191,34 +190,33 @@ public class IvanGameView extends SurfaceView implements Runnable{
                     }
                 }//inner for loop ends
 
-                if(attachcount>0){
-                    itsAttachedAlready=true;
+                if (attachcount > 0) {
+                    itsAttachedAlready = true;
                 }
-                if(attachcount==0){
-                    itsAttachedAlready=false;
+                if (attachcount == 0) {
+                    itsAttachedAlready = false;
                 }
 
             }//timer loop ends
 
-            if(itsAttachedAlready==false){
-                fall=true;
+            if (itsAttachedAlready == false) {
+                fall = true;
 
             }
-            if(itsAttachedAlready){
-                attachAny=true;
+            if (itsAttachedAlready) {
+                attachAny = true;
                 playercube.defaultrot();
-                fall=false;
+                fall = false;
             }
 
-            if(disabledTouch==true&& Rect.intersects(platform.detectTop,playercube.detectCollision)&&
-                           !Rect.intersects(platform.detectVert,playercube.detectCollision)
-            )
-            {
-                if(jumpBool&&playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()+1
-                        &&playercube.y>platform.y-15){
-                    alive=false;
+            if (disabledTouch == true && Rect.intersects(platform.detectTop, playercube.detectCollision) &&
+                    !Rect.intersects(platform.detectVert, playercube.detectCollision)
+            ) {
+                if (jumpBool && playercube.x + playercube.bitmap.getWidth() < platform.x + GameTracker.getSpeed() + 1
+                        && playercube.y > platform.y - 15) {
+                    alive = false;
                 }
-                if(jumpBool==false) {       //if colliding and not going up, attach! Very important
+                if (jumpBool == false) {       //if colliding and not going up, attach! Very important
                     platform.multiAttach = true;
 
                     attachAny = true;
@@ -231,102 +229,96 @@ public class IvanGameView extends SurfaceView implements Runnable{
                 }
             }
 
-            if (Rect.intersects(platform.detectCollision, playercube.detectCollision))
-            {
-                if(Rect.intersects(platform.detectBot,playercube.detectCollision))
-                {                                                           //Extra insurance for bottom
+            if (Rect.intersects(platform.detectCollision, playercube.detectCollision)) {
+                if (Rect.intersects(platform.detectBot, playercube.detectCollision)) {                                                           //Extra insurance for bottom
                     alive = false;
                     return;
                 }
 
-                if (fall == true && playercube.y+playercube.bitmap.getHeight() >= platform.y) {
-                                                //If hitting platform roof while falling, attach!
-                    fall=false;
-                    playercube.y = platform.y-playercube.bitmap.getHeight();//-GameTracker.getJumpHeight();
+                if (fall == true && playercube.y + playercube.bitmap.getHeight() >= platform.y) {
+                    //If hitting platform roof while falling, attach!
+                    fall = false;
+                    playercube.y = platform.y - playercube.bitmap.getHeight();//-GameTracker.getJumpHeight();
                     attachAny = true;
 
-                    platform.multiAttach=true;
+                    platform.multiAttach = true;
                     playercube.defaultrot();
-                    playercube.y=platform.y-playercube.bitmap.getHeight();
+                    playercube.y = platform.y - playercube.bitmap.getHeight();
 
                     platform.platformAttach = true;
                 }
             }
 
-            if(platform.platformAttach==true &&
-                    playercube.x > platform.x + platform.bitmap.getWidth())
-            {
-                platform.platformAttach=false;
-                platform.multiAttach=false;
+            if (platform.platformAttach == true &&
+                    playercube.x > platform.x + platform.bitmap.getWidth()) {
+                platform.platformAttach = false;
+                platform.multiAttach = false;
 
             }
-            if(platform.multiAttach==true&&playercube.x>platform.x+platform.bitmap.getWidth())
-            {
-                platform.multiAttach=false;
+            if (platform.multiAttach == true && playercube.x > platform.x + platform.bitmap.getWidth()) {
+                platform.multiAttach = false;
             }
 
             playercube.updatecollisions();
-            if(Rect.intersects(platform.detectVert,playercube.detectCollision)&&itsAttachedAlready==false){
+            if (Rect.intersects(platform.detectVert, playercube.detectCollision) && itsAttachedAlready == false) {
                 //Left Side of platform minus Jump Height shouldn't intersect!
 
-                if((fall==false&&disabledTouch==true)||
-                        (playercube.x+playercube.bitmap.getWidth()<platform.x+GameTracker.getSpeed()))
-                {
+                if ((fall == false && disabledTouch == true) ||
+                        (playercube.x + playercube.bitmap.getWidth() < platform.x + GameTracker.getSpeed())) {
                     alive = false;
                     return;
                 }
             }
         }//FOR LOOP ENDS!
 
-        if(itsAttachedAlready==false){
-            fall=true;
+        if (itsAttachedAlready == false) {
+            fall = true;
         }
 
-        if(playercube.y == playercube.startY&&queuedJump==true&&attachAny){        //Jump Queue logic
-            playercube.jumpYmax=playercube.y - GameTracker.getMaxJump();
-            jumpBool=true;
-            queuedJump=false;
+        if (playercube.y == playercube.startY && queuedJump == true && attachAny) {        //Jump Queue logic
+            playercube.jumpYmax = playercube.y - GameTracker.getMaxJump();
+            jumpBool = true;
+            queuedJump = false;
         }
-        if (jumpBool==true) { //On Touch => remove states & go up!
+        if (jumpBool == true) { //On Touch => remove states & go up!
             playercube.Rotation();
             attachAny = false;
             fall = false;
 
-            if(playercube.y <= playercube.jumpYmax+20){      //On reaching maximum jump height => Fall!
+            if (playercube.y <= playercube.jumpYmax + 20) {      //On reaching maximum jump height => Fall!
                 delayfall++;
-                if(delayfall>3) {               //Delay fall at top for smoother motion
+                if (delayfall > 3) {               //Delay fall at top for smoother motion
                     jumpBool = false;
                     fall = true;
-                    delayfall=0;
+                    delayfall = 0;
                 }
-            }
-            else{
+            } else {
                 playercube.update(GameTracker.getJumpHeight());
             }
         }
 
-        if(fall==true){                     //Fall!
+        if (fall == true) {                     //Fall!
             playercube.update((-GameTracker.getJumpHeight()));
             playercube.Rotation();
 
         }
 
-        if((playercube.y + playercube.bitmap.getHeight())>=floor&&fall==true){    //Attach to floor!
+        if ((playercube.y + playercube.bitmap.getHeight()) >= floor && fall == true) {    //Attach to floor!
 
-            attachAny=true;
-            fall=false;
-            playercube.rotationIndex=playercube.rotations.length;
+            attachAny = true;
+            fall = false;
+            playercube.rotationIndex = playercube.rotations.length;
             playercube.Rotation();
-            playercube.y=floor-playercube.bitmap.getHeight();
-            playercube.startY=playercube.y;
+            playercube.y = floor - playercube.bitmap.getHeight();
+            playercube.startY = playercube.y;
         }
-        for(int i=0; i<platforms.size();i++){
-            if(platforms.get(0).isAlive==false){
+        for (int i = 0; i < platforms.size(); i++) {
+            if (platforms.get(0).isAlive == false) {
                 platforms.remove(0);
             }
         }
-        for(int i=0; i<spikes.size();i++){
-            if(spikes.get(0).isAlive==false){
+        for (int i = 0; i < spikes.size(); i++) {
+            if (spikes.get(0).isAlive == false) {
                 spikes.remove(0);
             }
         }
@@ -334,7 +326,7 @@ public class IvanGameView extends SurfaceView implements Runnable{
     //Update ends!
 
     private void frameRate() {
-        try{
+        try {
             gameThread.sleep(6);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -343,16 +335,16 @@ public class IvanGameView extends SurfaceView implements Runnable{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(fall==true) {
+        if (fall == true) {
             queuedJump = true;        //Queues up the jump only when falling
         }
 
-        if (playercube.y == playercube.startY){           // Disable event while in jump animation!
+        if (playercube.y == playercube.startY) {           // Disable event while in jump animation!
             disabledTouch = false;                        // When attaching to PLATFORM, startY needs to change as well!
 
         }
-        if(disabledTouch == false){
-            playercube.jumpYmax=playercube.y - GameTracker.getMaxJump();         //Update max jump height!
+        if (disabledTouch == false) {
+            playercube.jumpYmax = playercube.y - GameTracker.getMaxJump();         //Update max jump height!
             jumpBool = true;
 
             disabledTouch = true;

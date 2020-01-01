@@ -8,7 +8,7 @@ public class PlatformModule {
     public ArrayList<Spikes> spikes = new ArrayList<Spikes>();
     public ArrayList<Platform> platforms = new ArrayList<Platform>();
 
-    public PlatformModule(String name, ArrayList<Spikes> spikes, ArrayList<Platform> platforms){
+    public PlatformModule(String name, ArrayList<Spikes> spikes, ArrayList<Platform> platforms) {
         this.name = name;
         this.spikes = spikes;
         this.platforms = platforms;

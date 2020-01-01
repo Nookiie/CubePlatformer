@@ -23,32 +23,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         boolean isRetry = getIntent().getBooleanExtra("retry", false);
 
-        if(isRetry){
+        if (isRetry) {
             btnStartGame.performClick();
         }
 
     }
 
-    /*
-        View.OnClickListener onClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch(v.getId()){
-                    case R.id.buttonStart:
-                        Intent intent = new Intent(MainActivity.this, GameActivity.class);
-
-                        startActivity(intent);
-                        break;
-                    default:
-
-                        break;
-                }
-            }
-        };
-        */
-
-
-//РАБОТИ!!!
     @Override
     public void onClick(View v) {
         GameFragment gameFragment = new GameFragment();

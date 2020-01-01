@@ -13,7 +13,7 @@ public abstract class BaseEntity {
     private Rect cube;
     private Paint paint;
 
-    public BaseEntity (int x, int y,Context context){//, Rect cube, Paint paint) {
+    public BaseEntity(int x, int y, Context context) {//, Rect cube, Paint paint) {
         this.x = x;
         this.y = y;
         this.cube = cube;
@@ -70,6 +70,6 @@ public abstract class BaseEntity {
     }
 
     public abstract void draw(Canvas canvas);
-   // public abstract void update();
+    // public abstract void update();
 
 }
