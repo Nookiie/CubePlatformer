@@ -29,6 +29,9 @@ public class IvanGameView extends SurfaceView implements Runnable {
     int score = GameTracker.getScore();
     int delayfall = 0;
     int attachcount = 0;
+    int speedRate = 150;
+    int jumpRate = 100;
+
     PlayerCube playercube;
     boolean disabledTouch = false;
     boolean itsAttachedAlready = false;
@@ -42,12 +45,6 @@ public class IvanGameView extends SurfaceView implements Runnable {
     public static int yy;
     public static int floorbetter;
     public static int elementSize;//Platform.size;
-
-
-
-
-
-
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -75,8 +72,8 @@ public class IvanGameView extends SurfaceView implements Runnable {
         //floor = sizeY - 120;
 
         playercube = new PlayerCube(sizeX, sizeY, context);
-        elementSize=playercube.bitmap.getWidth();
-        GameTracker.setMaxJump(elementSize*3+elementSize/3);
+        elementSize = playercube.bitmap.getWidth();
+        GameTracker.setMaxJump(elementSize * 3 + elementSize / 3);
         surfaceHolder = getHolder();
 
         paint = new Paint();
@@ -93,7 +90,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
             draw();
 
             // Module Spawn
-            if (timer % GameTracker.getModuleRate() == 0 || (firstModule&&othertimer>0)) {
+            if (timer % GameTracker.getModuleRate() == 0 || (firstModule && othertimer > 0)) {
                 firstModule = false;
                 // Initializing the Module Builder
                 ModuleBuilder.modulesMap(getContext(), sizeX, sizeY, playercube);
@@ -126,13 +123,18 @@ public class IvanGameView extends SurfaceView implements Runnable {
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
-            floor=canvas.getHeight();
+            floor = canvas.getHeight();
             //elementSize=platforms.get(0).bitmap.getWidth();
-            xx=canvas.getWidth();
-            yy=canvas.getHeight();
-            floorbetter=floor;
-            othertimer=1;
+            xx = canvas.getWidth();
+            yy = canvas.getHeight();
+            floorbetter = floor;
+            othertimer = 1;
 
+            if (GameTracker.getSpeed() < canvas.getWidth() / speedRate)
+                    GameTracker.setSpeed(canvas.getWidth() / speedRate);
+
+            if(GameTracker.getJumpHeight() < canvas.getWidth() / jumpRate)
+                    GameTracker.setJumpHeight(canvas.getWidth() / jumpRate);
 
            /* canvas.drawText("score: " + score,
                     canvas.getWidth() / 2 - 40,
@@ -242,9 +244,9 @@ public class IvanGameView extends SurfaceView implements Runnable {
             }
             if (itsAttachedAlready) {
                 attachAny = true;
-               if(playercube.rotationIndex>2) {
-                   playercube.defaultrot();
-               }
+                if (playercube.rotationIndex > 2) {
+                    playercube.defaultrot();
+                }
                 fall = false;
             }
 

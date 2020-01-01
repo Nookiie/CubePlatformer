@@ -34,7 +34,6 @@ public class GameTracker {
    // private static Point viewSize = DEFAULT_VIEW_SIZE;
     private static Point screenSize = DEFAULT_SCREEN_SIZE;
 
-
     private static boolean paused = false;
     private static boolean godMode = false; // Functional, use for debug purposes
     private static boolean spikesDisabled = false;
