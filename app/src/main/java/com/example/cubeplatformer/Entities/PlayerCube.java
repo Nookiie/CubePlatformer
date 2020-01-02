@@ -24,6 +24,7 @@ public class PlayerCube extends BaseEntity {
     public int y;
     public int startY;
     public int rotationIndex;
+    public static int count;
 
     public Rect detectCollision;
     public int jumpYmax;
@@ -81,6 +82,7 @@ public class PlayerCube extends BaseEntity {
 
     public void Rotation() {
 
+        count++;
         rotationIndex++;
         if (rotationIndex > rotations.length - 1) {
             rotationIndex = 0;
@@ -93,7 +95,7 @@ public class PlayerCube extends BaseEntity {
     }
 
     public Bitmap defaultrot() {
-        rotationIndex=0;
+        //rotationIndex=0;
         Bitmap bi = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube2);
         bitmap = bi;

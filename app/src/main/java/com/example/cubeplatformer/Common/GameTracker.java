@@ -20,8 +20,7 @@ public class GameTracker {
     private static final int DEFAULT_SCORE = 2;
     private static final int DEFAULT_SCORE_RATE = 15;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
-    private static final int DEFAULT_MODULE_RATE = 185;
-  //  private static final Point DEFAULT_VIEW_SIZE = new Point(720, 480);
+    private static final int DEFAULT_MODULE_RATE = 225;
     private static final Point DEFAULT_SCREEN_SIZE = new Point(IvanGameView.xx, IvanGameView.yy);
 
     private static int jumpHeight = DEFAULT_JUMP_HEIGHT;
@@ -31,7 +30,6 @@ public class GameTracker {
     private static int scoreMultiplier = DEFAULT_SCORE_MULTIPLIER;
     private static int scoreRate = DEFAULT_SCORE_RATE;
     private static int moduleRate = DEFAULT_MODULE_RATE;
-   // private static Point viewSize = DEFAULT_VIEW_SIZE;
     private static Point screenSize = DEFAULT_SCREEN_SIZE;
 
     private static boolean paused = false;
@@ -123,14 +121,6 @@ public class GameTracker {
     public static void setJumpHeight(int jumpHeight) {
         GameTracker.jumpHeight = jumpHeight;
     }
-
-  //  public static Point getViewSize() {
-  //      return viewSize;
-  //  }
-
-  //  public static void setViewSize(Point viewSize) {
-  //      GameTracker.viewSize = viewSize;
-  //  }
 
     public static Point getScreenSize() {
         return screenSize;

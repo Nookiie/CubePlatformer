@@ -29,8 +29,8 @@ public class IvanGameView extends SurfaceView implements Runnable {
     int score = GameTracker.getScore();
     int delayfall = 0;
     int attachcount = 0;
-    int speedRate = 150;
-    int jumpRate = 100;
+   // int speedRate = 150;
+   // int jumpRate = 100;
 
     PlayerCube playercube;
     boolean disabledTouch = false;
@@ -44,7 +44,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
     public static int xx;
     public static int yy;
     public static int floorbetter;
-    public static int elementSize;//Platform.size;
+    public static int elementSize;
 
     ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
@@ -61,19 +61,18 @@ public class IvanGameView extends SurfaceView implements Runnable {
     int sizeY;
     boolean jumpBool = false;
 
-    int stop = 270;
-
     public IvanGameView(Context context, int sizeX, int sizeY) {
         super(context);
 
         alive = true;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        //floor = sizeY - 120;
 
         playercube = new PlayerCube(sizeX, sizeY, context);
         elementSize = playercube.bitmap.getWidth();
         GameTracker.setMaxJump(elementSize * 3 + elementSize / 3);
+        GameTracker.setModuleRate(elementSize*5);
+
         surfaceHolder = getHolder();
 
         paint = new Paint();
@@ -130,28 +129,18 @@ public class IvanGameView extends SurfaceView implements Runnable {
             floorbetter = floor;
             othertimer = 1;
 
-            if (GameTracker.getSpeed() < canvas.getWidth() / speedRate)
-                    GameTracker.setSpeed(canvas.getWidth() / speedRate);
+            //if (elementSize>50) {//canvas.getWidth() / speedRate)
+                GameTracker.setSpeed((int) (elementSize / 7.5));
+                GameTracker.setJumpHeight(GameTracker.getMaxJump() / 15);
+           // }
+           // if(GameTracker.getJumpHeight() < canvas.getWidth() / jumpRate)
+           //         GameTracker.setJumpHeight(canvas.getWidth() / jumpRate);
 
-            if(GameTracker.getJumpHeight() < canvas.getWidth() / jumpRate)
-                    GameTracker.setJumpHeight(canvas.getWidth() / jumpRate);
-
-           /* canvas.drawText("score: " + score,
-                    canvas.getWidth() / 2 - 40,
-                    50,
-                    paint);*/
-            canvas.drawText("XX: " + canvas.getWidth(),
+           canvas.drawText("score: " + score,
                     canvas.getWidth() / 2 - 40,
                     50,
                     paint);
-            canvas.drawText("size: " + elementSize,
-                    canvas.getWidth() / 2 - 40,
-                    120,
-                    paint);
-            canvas.drawText("maxJump: " + GameTracker.getMaxJump(),
-                    canvas.getWidth() / 2 - 40,
-                    190,
-                    paint);
+
 
             canvas.drawColor(Color.argb(200, 131, 159, 255));
 
@@ -239,7 +228,8 @@ public class IvanGameView extends SurfaceView implements Runnable {
             }//timer loop ends
 
             if (itsAttachedAlready == false) {
-                fall = true;
+                if(playercube.y+playercube.bitmap.getHeight()<floor)
+                    fall = true;
 
             }
             if (itsAttachedAlready) {
@@ -313,6 +303,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
         }//FOR LOOP ENDS!
 
         if (itsAttachedAlready == false) {
+            if(playercube.y+playercube.bitmap.getHeight()<floor)
             fall = true;
         }
 
@@ -323,6 +314,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
         }
         if (jumpBool == true) { //On Touch => remove states & go up!
             playercube.Rotation();
+
             attachAny = false;
             fall = false;
 
@@ -341,15 +333,15 @@ public class IvanGameView extends SurfaceView implements Runnable {
         if (fall == true) {                     //Fall!
             playercube.update((-GameTracker.getJumpHeight()));
             playercube.Rotation();
-
         }
 
         if ((playercube.y + playercube.bitmap.getHeight()) >= floor && fall == true) {    //Attach to floor!
 
             attachAny = true;
             fall = false;
-            playercube.rotationIndex = playercube.rotations.length;
-            playercube.Rotation();
+            if (playercube.rotationIndex > 2) {
+                playercube.defaultrot();
+            }
             playercube.y = floor - playercube.bitmap.getHeight();
             playercube.startY = playercube.y;
         }

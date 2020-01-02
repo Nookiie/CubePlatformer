@@ -16,12 +16,8 @@ public class Spikes extends BaseEntity {
     Context context;
     public int x;
     public int y;
-    //int startX=300;     //Take From external class LevelBuilder OR something.
-    int finalX = -10;
     public boolean isAlive = true;
 
-    // int maxX;
-    // int maxY;
 
     int speed = GameTracker.getSpeed();
 
