@@ -29,13 +29,12 @@ public class IvanGameView extends SurfaceView implements Runnable {
     int score = GameTracker.getScore();
     int delayfall = 0;
     int attachcount = 0;
-   // int speedRate = 150;
-   // int jumpRate = 100;
 
     PlayerCube playercube;
     boolean disabledTouch = false;
     boolean itsAttachedAlready = false;
     boolean firstModule = true;
+    ArrayList<Spikes> spikes = new ArrayList<>();
 
     boolean attachAny = false;
     boolean fall = false;
@@ -46,9 +45,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
     public static int floorbetter;
     public static int elementSize;
 
-    ArrayList<Spikes> spikes = new ArrayList<>();
     ArrayList<Platform> platforms = new ArrayList<>();
-
 
     Paint paint;
     SurfaceHolder surfaceHolder;
@@ -71,7 +68,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
         playercube = new PlayerCube(sizeX, sizeY, context);
         elementSize = playercube.bitmap.getWidth();
         GameTracker.setMaxJump(elementSize * 3 + elementSize / 3);
-        GameTracker.setModuleRate(elementSize*5);
+        GameTracker.setModuleRate(elementSize * 5);
 
         surfaceHolder = getHolder();
 
@@ -130,17 +127,16 @@ public class IvanGameView extends SurfaceView implements Runnable {
             othertimer = 1;
 
             //if (elementSize>50) {//canvas.getWidth() / speedRate)
-                GameTracker.setSpeed((int) (elementSize / 7.5));
-                GameTracker.setJumpHeight(GameTracker.getMaxJump() / 15);
-           // }
-           // if(GameTracker.getJumpHeight() < canvas.getWidth() / jumpRate)
-           //         GameTracker.setJumpHeight(canvas.getWidth() / jumpRate);
+            GameTracker.setSpeed((int) (elementSize / 7.5));
+            GameTracker.setJumpHeight(GameTracker.getMaxJump() / 15);
+            // }
+            // if(GameTracker.getJumpHeight() < canvas.getWidth() / jumpRate)
+            //         GameTracker.setJumpHeight(canvas.getWidth() / jumpRate);
 
-           canvas.drawText("score: " + score,
+            canvas.drawText("score: " + score,
                     canvas.getWidth() / 2 - 40,
                     50,
                     paint);
-
 
             canvas.drawColor(Color.argb(200, 131, 159, 255));
 
@@ -228,7 +224,7 @@ public class IvanGameView extends SurfaceView implements Runnable {
             }//timer loop ends
 
             if (itsAttachedAlready == false) {
-                if(playercube.y+playercube.bitmap.getHeight()<floor)
+                if (playercube.y + playercube.bitmap.getHeight() < floor)
                     fall = true;
 
             }
@@ -303,8 +299,8 @@ public class IvanGameView extends SurfaceView implements Runnable {
         }//FOR LOOP ENDS!
 
         if (itsAttachedAlready == false) {
-            if(playercube.y+playercube.bitmap.getHeight()<floor)
-            fall = true;
+            if (playercube.y + playercube.bitmap.getHeight() < floor)
+                fall = true;
         }
 
         if (playercube.y == playercube.startY && queuedJump == true && attachAny) {        //Jump Queue logic

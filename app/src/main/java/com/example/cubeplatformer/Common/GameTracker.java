@@ -16,7 +16,7 @@ public class GameTracker {
 
     private static final int DEFAULT_SPEED = 6;
     private static final int DEFAULT_JUMP_HEIGHT = 10;      // EVERY FRAME JUMP INCREASES BY THIS!
-    private static final int DEFAULT_MAX_JUMP = IvanGameView.elementSize*3+IvanGameView.elementSize/3;
+    private static final int DEFAULT_MAX_JUMP = IvanGameView.elementSize * 3 + IvanGameView.elementSize / 3;
     private static final int DEFAULT_SCORE = 2;
     private static final int DEFAULT_SCORE_RATE = 15;
     private static final int DEFAULT_SCORE_MULTIPLIER = 1;
@@ -32,9 +32,7 @@ public class GameTracker {
     private static int moduleRate = DEFAULT_MODULE_RATE;
     private static Point screenSize = DEFAULT_SCREEN_SIZE;
 
-    private static boolean paused = false;
     private static boolean godMode = false; // Functional, use for debug purposes
-    private static boolean spikesDisabled = false;
 
     public static ArrayList<Integer> scores = new ArrayList<>();
 
@@ -82,28 +80,12 @@ public class GameTracker {
         score += scoreRate * scoreMultiplier;
     }
 
-    public static boolean isPaused() {
-        return paused;
-    }
-
-    public static void togglePaused() {
-        paused = !paused;
-    }
-
     public static boolean isGodMode() {
         return godMode;
     }
 
     public static void toggleGodMode() {
         godMode = !godMode;
-    }
-
-    public static boolean isSpikesDisabled() {
-        return spikesDisabled;
-    }
-
-    public static void toggleSpikesDisabled() {
-        spikesDisabled = !spikesDisabled;
     }
 
     public static int getJumpHeight() {

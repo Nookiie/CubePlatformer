@@ -95,7 +95,6 @@ public class PlayerCube extends BaseEntity {
     }
 
     public Bitmap defaultrot() {
-        //rotationIndex=0;
         Bitmap bi = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.cube2);
         bitmap = bi;
